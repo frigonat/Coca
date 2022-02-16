@@ -1,0 +1,9 @@
+14.12.2021 - 22:20 a 23:20 - 
+*****************************
+Hice el funcionamiento del frmLogin_iSeries; lo conecté al formulario principal.-
+Armé el funcionamiento de obtener credenciales desde el codificado
+Finalicé los métodos de la clase Compania
+Agregué excepciones nuevas
+Incorporé referencias y dlls (Auditorías, Datos Comunes, IBM.iSeries.Db2, etc.)
+
+Continuar con la clase Documento
