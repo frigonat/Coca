@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -38,12 +42,12 @@
             this.btnRefrescar = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.cmbClientes = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.dgvRecepciones = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tslCantidadDeRecepciones = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -51,6 +55,12 @@
             this.colRececpcionNombreAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionNumero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionFechaIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionHoraIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionUsuarioIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionCantidadPallets = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionCantidadCajas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionCantidadUnidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecepciones)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -69,11 +79,11 @@
             this.groupBox1.Controls.Add(this.btnRefrescar);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.cmbClientes);
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
+            this.groupBox1.Controls.Add(this.dtpFechaHasta);
             this.groupBox1.Controls.Add(this.dtpFechaDesde);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(969, 99);
+            this.groupBox1.Size = new System.Drawing.Size(1171, 99);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -133,7 +143,7 @@
             // btnRefrescar
             // 
             this.btnRefrescar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefrescar.Location = new System.Drawing.Point(889, 39);
+            this.btnRefrescar.Location = new System.Drawing.Point(1091, 39);
             this.btnRefrescar.Name = "btnRefrescar";
             this.btnRefrescar.Size = new System.Drawing.Size(43, 35);
             this.btnRefrescar.TabIndex = 4;
@@ -155,14 +165,14 @@
             this.cmbClientes.Size = new System.Drawing.Size(224, 21);
             this.cmbClientes.TabIndex = 2;
             // 
-            // dateTimePicker2
+            // dtpFechaHasta
             // 
-            this.dateTimePicker2.CustomFormat = "dd.MM.yyyy";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(97, 47);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(106, 21);
-            this.dateTimePicker2.TabIndex = 1;
+            this.dtpFechaHasta.CustomFormat = "dd.MM.yyyy";
+            this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaHasta.Location = new System.Drawing.Point(97, 47);
+            this.dtpFechaHasta.Name = "dtpFechaHasta";
+            this.dtpFechaHasta.Size = new System.Drawing.Size(106, 21);
+            this.dtpFechaHasta.TabIndex = 1;
             // 
             // dtpFechaDesde
             // 
@@ -185,25 +195,31 @@
             this.colRecepcionAlmacen,
             this.colRececpcionNombreAlmacen,
             this.colRecepcionTipoDocumento,
-            this.colRecepcionNumero});
+            this.colRecepcionNumero,
+            this.colRecepcionFechaIngreso,
+            this.colRecepcionHoraIngreso,
+            this.colRecepcionUsuarioIngreso,
+            this.colRecepcionCantidadPallets,
+            this.colRecepcionCantidadCajas,
+            this.colRecepcionCantidadUnidades});
             this.dgvRecepciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvRecepciones.Location = new System.Drawing.Point(13, 129);
             this.dgvRecepciones.Name = "dgvRecepciones";
             this.dgvRecepciones.RowHeadersVisible = false;
-            this.dgvRecepciones.Size = new System.Drawing.Size(968, 447);
+            this.dgvRecepciones.Size = new System.Drawing.Size(1170, 447);
             this.dgvRecepciones.TabIndex = 1;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2,
+            this.tslCantidadDeRecepciones,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel5});
             this.statusStrip1.Location = new System.Drawing.Point(0, 591);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(998, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1200, 24);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -218,16 +234,16 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(122, 19);
             this.toolStripStatusLabel1.Text = "...";
             // 
-            // toolStripStatusLabel2
+            // tslCantidadDeRecepciones
             // 
-            this.toolStripStatusLabel2.AutoSize = false;
-            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            this.tslCantidadDeRecepciones.AutoSize = false;
+            this.tslCantidadDeRecepciones.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(122, 19);
-            this.toolStripStatusLabel2.Text = "...";
+            this.tslCantidadDeRecepciones.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.tslCantidadDeRecepciones.Name = "tslCantidadDeRecepciones";
+            this.tslCantidadDeRecepciones.Size = new System.Drawing.Size(122, 19);
+            this.tslCantidadDeRecepciones.Text = "...";
             // 
             // toolStripStatusLabel3
             // 
@@ -271,6 +287,7 @@
             // 
             this.colRececpcionNombreAlmacen.HeaderText = "Nombre";
             this.colRececpcionNombreAlmacen.Name = "colRececpcionNombreAlmacen";
+            this.colRececpcionNombreAlmacen.Width = 250;
             // 
             // colRecepcionTipoDocumento
             // 
@@ -279,14 +296,56 @@
             // 
             // colRecepcionNumero
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N0";
+            this.colRecepcionNumero.DefaultCellStyle = dataGridViewCellStyle1;
             this.colRecepcionNumero.HeaderText = "Número";
             this.colRecepcionNumero.Name = "colRecepcionNumero";
+            // 
+            // colRecepcionFechaIngreso
+            // 
+            this.colRecepcionFechaIngreso.HeaderText = "Fecha Ingreso";
+            this.colRecepcionFechaIngreso.Name = "colRecepcionFechaIngreso";
+            // 
+            // colRecepcionHoraIngreso
+            // 
+            this.colRecepcionHoraIngreso.HeaderText = "Hora Ingreso";
+            this.colRecepcionHoraIngreso.Name = "colRecepcionHoraIngreso";
+            // 
+            // colRecepcionUsuarioIngreso
+            // 
+            this.colRecepcionUsuarioIngreso.HeaderText = "Usuario Ingreso";
+            this.colRecepcionUsuarioIngreso.Name = "colRecepcionUsuarioIngreso";
+            // 
+            // colRecepcionCantidadPallets
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N0";
+            this.colRecepcionCantidadPallets.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colRecepcionCantidadPallets.HeaderText = "# de Pallets";
+            this.colRecepcionCantidadPallets.Name = "colRecepcionCantidadPallets";
+            // 
+            // colRecepcionCantidadCajas
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N0";
+            this.colRecepcionCantidadCajas.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colRecepcionCantidadCajas.HeaderText = "# Cajas";
+            this.colRecepcionCantidadCajas.Name = "colRecepcionCantidadCajas";
+            // 
+            // colRecepcionCantidadUnidades
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N0";
+            this.colRecepcionCantidadUnidades.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colRecepcionCantidadUnidades.HeaderText = "# Unidades";
+            this.colRecepcionCantidadUnidades.Name = "colRecepcionCantidadUnidades";
             // 
             // frmRecepciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 615);
+            this.ClientSize = new System.Drawing.Size(1200, 615);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgvRecepciones);
             this.Controls.Add(this.groupBox1);
@@ -310,14 +369,14 @@
         private System.Windows.Forms.DataGridView dgvRecepciones;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel tslCantidadDeRecepciones;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.Button btnRefrescar;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox cmbClientes;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpFechaHasta;
         private System.Windows.Forms.DateTimePicker dtpFechaDesde;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -329,5 +388,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRececpcionNombreAlmacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionTipoDocumento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionNumero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionFechaIngreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionHoraIngreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionUsuarioIngreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionCantidadPallets;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionCantidadCajas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionCantidadUnidades;
     }
 }

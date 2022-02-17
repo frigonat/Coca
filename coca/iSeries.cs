@@ -14,8 +14,8 @@ namespace coca
     /// </summary>
     class iSeries
     {
-        public const int intevaloValidezDeCredenciales = 60;
-
+        public const int intevaloValidezDeCredenciales = 240;    //4 horas = 240 minutos
+  
         /// <summary>
         /// Obtiene las credenciales para conectarse al Db2 for i
         /// </summary>

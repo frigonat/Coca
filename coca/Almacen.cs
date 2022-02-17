@@ -65,7 +65,7 @@ namespace coca
         {
             List<string> parametrosDeConexion = new List<string>();
             iSeriesConnection cn;
-            DataTable almacenBuscado;
+            DataTable almacenBuscado = null;
             string iSQL;
             string mensaje;
 
@@ -87,6 +87,7 @@ namespace coca
                 cn.Open();
                 almacenBuscado = cn.ExecuteQuery(iSQL);
                 cn.Close();
+
             }
             catch (Exception ex)
             {
@@ -103,6 +104,8 @@ namespace coca
                     excepcionActual = excepcionActual.InnerException;
                 }
             }
+            this.codigo = almacenBuscado.Rows[0].Field<string>("WHWHS");
+            this.nombre= almacenBuscado.Rows[0].Field<string>("WHDESC");
         }
 
         /// <summary>

@@ -75,6 +75,21 @@ namespace coca
         /// </summary>
         private string pantallaDeProceso;
 
+        /// <summary>
+        /// Cantidad de pallets existentes en el documento de recepción.-
+        /// </summary>
+        private int cantidadDePallets;
+
+        /// <summary>
+        /// Cantidad de cajas existentes en el documento de recepción.-
+        /// </summary>
+        private int cantidadDeCajas;
+
+        /// <summary>
+        /// Cantidad de unidades existentes en el documento de recepción.-
+        /// </summary>
+        private int cantidadDeUnidades;
+
         #endregion
 
         #region propiedades
@@ -176,6 +191,30 @@ namespace coca
             get { return pantallaDeProceso; }
         }
 
+        /// <summary>
+        /// Obtiene la cantidad de pallets del documento.-
+        /// </summary>
+        public int CantidadDePallets
+        {
+            get { return this.cantidadDePallets; }
+        }
+
+        /// <summary>
+        /// Obtiene la cantidad de cajas del documento.-
+        /// </summary>
+        public int CantidadDeCajas 
+        {
+            get { return this.cantidadDeCajas; }
+        }
+
+        /// <summary>
+        /// Obtiene la cantidad de unidades del documento.-
+        /// </summary>
+        public int CantidadDeUnidades
+        {
+            get { return this.cantidadDeUnidades; }
+        }
+
         #endregion
 
 
@@ -223,11 +262,10 @@ namespace coca
             if (numeroDocumentoBuscado == 0)
                 throw new Exception("El número de documento no es válido.");
 
-
-            iSQL = "SELECT * FROM BOSS06FLT.SER001H1 ";
-            iSQL += "WHERE TTWHS = '" + almacen.Codigo + "' AND ";
-            iSQL += "WHERE TTTIDO = '" + tipoDocumentoBuscado  + "' AND ";
-            iSQL += "WHERE TTIDDOC = " + numeroDocumentoBuscado.ToString() +  ";";
+            iSQL = "SELECT * FROM BOSS06FLT.SER001A0 ";
+            iSQL += "WHERE ALMACEN = '" + almacen.Codigo + "' AND ";
+            iSQL += "TIPO_DOCUMENTO = '" + tipoDocumentoBuscado + "' AND ";
+            iSQL += "ID_DOCUMENTO = " + numeroDocumentoBuscado.ToString();
 
             try
             {
@@ -267,21 +305,143 @@ namespace coca
 
             if (documentoBuscado.Rows.Count != 0)
             {
+                object ax;
+                DataTable palletsEncontrado;
+
+                // VARCHAR_FORMAT(timestamp_recepcion ,'yyyy-mm-dd')
+
                 this.almacen = almacen;
                 this.numero = numeroDocumentoBuscado;
-                this.fechaIngreso = DateTime.Now;
+                this.fechaIngreso = documentoBuscado.Rows[0].Field<DateTime>("TIMESTAMP_RECEPCION");
                 this.numeroNotaFiscal = 0;
                 this.numeroDocumentoDeEntrada = 0;
+                this.usuarioDeAlta = documentoBuscado.Rows[0].Field<string>("USUARIO_RECEPCION");
+
+                try
+                {
+                    cn.Open();
+
+                    iSQL = "SELECT DISTINCT (ttpal) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + numeroDocumentoBuscado;
+                    palletsEncontrado = cn.ExecuteQuery(iSQL);
+                    this.cantidadDePallets = palletsEncontrado.Rows.Count;
+
+                    iSQL = "SELECT COUNT(ttcx) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + numeroDocumentoBuscado;
+                    ax = cn.ExecuteScalar(iSQL);
+                    if (ax is DBNull)
+                        this.cantidadDeCajas= 0;
+                    else
+                        this.cantidadDeCajas = System.Convert.ToInt32(ax);
+
+                    iSQL = "SELECT COUNT(*) FROM BOSS06FLT.SER001F2 WHERE GGIDDOC = " + numeroDocumentoBuscado;
+                    ax = cn.ExecuteScalar(iSQL);
+                    if (ax is DBNull)
+                        this.cantidadDeUnidades = 0;
+                    else
+                        this.cantidadDeUnidades = System.Convert.ToInt32(ax);
+
+                    cn.Close();
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                    
             }
             else
             {
                 mensaje = "No se ha encontrado un documento con los datos especificados (" + ")";
                 Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Notificacion, objetoDeNegocio, 0, nombreBitacora);
-                throw new CompaniaNoEncontradaException(mensaje);
+                throw new DocumentoNoEncontradoException(mensaje);
+                
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        public static List<Documento> Obtener(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            string iSQL = "";
 
+            iSQL = "SELECT * FROM BOSS06FLT.SER001A0 ";
+            iSQL += "WHERE VARCHAR_FORMAT(timestamp_recepcion ,'yyyy-mm-dd') BETWEEN '";
+            iSQL += fechaDesde.ToString("yyyy-MM-dd") + "' AND '" + fechaHasta.ToString("yyyy-MM-dd") + "' ORDER BY 1";
+            return obtener(iSQL);
+        }
+            
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="iSQL"></param>
+        /// <returns></returns>
+        private static List<Documento> obtener(string iSQL)
+        {
+            List<Documento> listaParaDevolver = new List<Documento>();
+            List<string> parametrosDeConexion = new List<string>();
+            iSeriesConnection cn;
+            DataTable registrosEncontrados = null;
+
+            try
+            {
+                parametrosDeConexion = iSeries.ObtenerCredenciales();
+            }
+            catch (Exception ex)
+            {
+                parametrosDeConexion = null;
+                throw ex;
+            }
+
+            try
+            {
+                cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
+                cn.Open();
+                registrosEncontrados = cn.ExecuteQuery(iSQL);
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                Bitacora.AgregarEntrada("Han aparecido errores al intentar obtener los registros solicitados. Puede haber excepciones internas con mayor detalle.-", TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+
+                Exception excepcionActual = ex;
+                while (excepcionActual != null)
+                {
+                    Bitacora.AgregarEntrada(excepcionActual.Message, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                    excepcionActual = ex.InnerException;
+                }
+            }
+
+            if (registrosEncontrados != null)
+            {
+                foreach (DataRow fila in registrosEncontrados.Rows)
+                {
+                    if (fila.Field<object>("ALMACEN") is System.DBNull)
+                    {
+                        //
+                    }
+                    else
+                    {
+                        try
+                        {
+                            int a = fila.Field<int>("ID");
+                            Documento nuevoDocumento = new Documento(fila.Field<string>("ALMACEN"), fila.Field<string>("TIPO_DOCUMENTO"), fila.Field<int>("ID"));
+                            listaParaDevolver.Add(nuevoDocumento);
+                        }
+                        catch (Exception)
+                        {
+                            //do nothing
+                        }
+                    }
+                }
+            }
+
+            return listaParaDevolver;
+        }
 
         /// <summary>
         /// Lista de Pallets del documento.-
