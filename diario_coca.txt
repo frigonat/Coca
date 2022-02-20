@@ -7,3 +7,32 @@ Agregué excepciones nuevas
 Incorporé referencias y dlls (Auditorías, Datos Comunes, IBM.iSeries.Db2, etc.)
 
 Continuar con la clase Documento
+
+
+16 y 17 de febrero 2022
+*****************************
+
+Completé la clase Almacen.cs, las excepciones y mejoré la clase Documento para que se puedan obtener:
+
+> un Documento entero (constructor de la clase)
+> una lista de documentos según un rango de fechas (clases static Obtener() )
+> mostrar la lista de documentos en la grilla, para al menos controlar los ingresos
+
+
+20 de febrero 2022
+*****************************
+Hice la clase Tipo de Documento y completé la clase Documento con ella. También llené el combo del formulario de Recepciones.-
+Mejoré la clase documento con:
+	> Agregué el atributo/propiedad con el hash de cada documento y lo mostré en la grilla.-
+	> Saqué atributos/propiedades que no existen en la BD (pantalla proceso, hora de proceso, etc.)
+Pulí el login para que se verifiquen las credenciales al entrar y se pidan si son necesarias
+Agregué el formulario AcercaDe y lo llamé desde el menú correspondiente
+
+
+Para continuar:
+Seguir puliendo la GUI para que verifique / solicite credenciales
+
+
+
+
+

@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbTiposDeDocumento = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -55,9 +59,11 @@
             this.colRececpcionNombreAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionNumero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionNotaFiscal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionDocEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionFechaIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionHoraIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRecepcionUsuarioIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRecepcionArchivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionCantidadPallets = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionCantidadCajas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRecepcionCantidadUnidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,7 +76,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.cmbTiposDeDocumento);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -83,17 +89,17 @@
             this.groupBox1.Controls.Add(this.dtpFechaDesde);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1171, 99);
+            this.groupBox1.Size = new System.Drawing.Size(1452, 89);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // comboBox1
+            // cmbTiposDeDocumento
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(337, 53);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(128, 21);
-            this.comboBox1.TabIndex = 10;
+            this.cmbTiposDeDocumento.FormattingEnabled = true;
+            this.cmbTiposDeDocumento.Location = new System.Drawing.Point(337, 53);
+            this.cmbTiposDeDocumento.Name = "cmbTiposDeDocumento";
+            this.cmbTiposDeDocumento.Size = new System.Drawing.Size(148, 21);
+            this.cmbTiposDeDocumento.TabIndex = 10;
             // 
             // label5
             // 
@@ -143,7 +149,7 @@
             // btnRefrescar
             // 
             this.btnRefrescar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefrescar.Location = new System.Drawing.Point(1091, 39);
+            this.btnRefrescar.Location = new System.Drawing.Point(1372, 28);
             this.btnRefrescar.Name = "btnRefrescar";
             this.btnRefrescar.Size = new System.Drawing.Size(43, 35);
             this.btnRefrescar.TabIndex = 4;
@@ -196,17 +202,19 @@
             this.colRececpcionNombreAlmacen,
             this.colRecepcionTipoDocumento,
             this.colRecepcionNumero,
+            this.colRecepcionNotaFiscal,
+            this.colRecepcionDocEntrada,
             this.colRecepcionFechaIngreso,
             this.colRecepcionHoraIngreso,
-            this.colRecepcionUsuarioIngreso,
+            this.colRecepcionArchivo,
             this.colRecepcionCantidadPallets,
             this.colRecepcionCantidadCajas,
             this.colRecepcionCantidadUnidades});
             this.dgvRecepciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvRecepciones.Location = new System.Drawing.Point(13, 129);
+            this.dgvRecepciones.Location = new System.Drawing.Point(13, 118);
             this.dgvRecepciones.Name = "dgvRecepciones";
             this.dgvRecepciones.RowHeadersVisible = false;
-            this.dgvRecepciones.Size = new System.Drawing.Size(1170, 447);
+            this.dgvRecepciones.Size = new System.Drawing.Size(1451, 458);
             this.dgvRecepciones.TabIndex = 1;
             // 
             // statusStrip1
@@ -219,7 +227,7 @@
             this.toolStripStatusLabel5});
             this.statusStrip1.Location = new System.Drawing.Point(0, 591);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1200, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1481, 24);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -293,59 +301,83 @@
             // 
             this.colRecepcionTipoDocumento.HeaderText = "Tipo de Documento";
             this.colRecepcionTipoDocumento.Name = "colRecepcionTipoDocumento";
+            this.colRecepcionTipoDocumento.Width = 140;
             // 
             // colRecepcionNumero
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N0";
-            this.colRecepcionNumero.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N0";
+            this.colRecepcionNumero.DefaultCellStyle = dataGridViewCellStyle9;
             this.colRecepcionNumero.HeaderText = "Número";
             this.colRecepcionNumero.Name = "colRecepcionNumero";
             // 
+            // colRecepcionNotaFiscal
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
+            this.colRecepcionNotaFiscal.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colRecepcionNotaFiscal.HeaderText = "Nota Fiscal";
+            this.colRecepcionNotaFiscal.Name = "colRecepcionNotaFiscal";
+            // 
+            // colRecepcionDocEntrada
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N0";
+            this.colRecepcionDocEntrada.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colRecepcionDocEntrada.HeaderText = "Doc.Entrada";
+            this.colRecepcionDocEntrada.Name = "colRecepcionDocEntrada";
+            // 
             // colRecepcionFechaIngreso
             // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colRecepcionFechaIngreso.DefaultCellStyle = dataGridViewCellStyle12;
             this.colRecepcionFechaIngreso.HeaderText = "Fecha Ingreso";
             this.colRecepcionFechaIngreso.Name = "colRecepcionFechaIngreso";
             // 
             // colRecepcionHoraIngreso
             // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colRecepcionHoraIngreso.DefaultCellStyle = dataGridViewCellStyle13;
             this.colRecepcionHoraIngreso.HeaderText = "Hora Ingreso";
             this.colRecepcionHoraIngreso.Name = "colRecepcionHoraIngreso";
             // 
-            // colRecepcionUsuarioIngreso
+            // colRecepcionArchivo
             // 
-            this.colRecepcionUsuarioIngreso.HeaderText = "Usuario Ingreso";
-            this.colRecepcionUsuarioIngreso.Name = "colRecepcionUsuarioIngreso";
+            this.colRecepcionArchivo.HeaderText = "Archivo";
+            this.colRecepcionArchivo.Name = "colRecepcionArchivo";
+            this.colRecepcionArchivo.Width = 200;
             // 
             // colRecepcionCantidadPallets
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N0";
-            this.colRecepcionCantidadPallets.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colRecepcionCantidadPallets.HeaderText = "# de Pallets";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N0";
+            this.colRecepcionCantidadPallets.DefaultCellStyle = dataGridViewCellStyle14;
+            this.colRecepcionCantidadPallets.HeaderText = "Pallets";
             this.colRecepcionCantidadPallets.Name = "colRecepcionCantidadPallets";
+            this.colRecepcionCantidadPallets.Width = 50;
             // 
             // colRecepcionCantidadCajas
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N0";
-            this.colRecepcionCantidadCajas.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colRecepcionCantidadCajas.HeaderText = "# Cajas";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "N0";
+            this.colRecepcionCantidadCajas.DefaultCellStyle = dataGridViewCellStyle15;
+            this.colRecepcionCantidadCajas.HeaderText = "Cajas";
             this.colRecepcionCantidadCajas.Name = "colRecepcionCantidadCajas";
+            this.colRecepcionCantidadCajas.Width = 50;
             // 
             // colRecepcionCantidadUnidades
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N0";
-            this.colRecepcionCantidadUnidades.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colRecepcionCantidadUnidades.HeaderText = "# Unidades";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "N0";
+            this.colRecepcionCantidadUnidades.DefaultCellStyle = dataGridViewCellStyle16;
+            this.colRecepcionCantidadUnidades.HeaderText = "Unidades";
             this.colRecepcionCantidadUnidades.Name = "colRecepcionCantidadUnidades";
             // 
             // frmRecepciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 615);
+            this.ClientSize = new System.Drawing.Size(1481, 615);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgvRecepciones);
             this.Controls.Add(this.groupBox1);
@@ -381,16 +413,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbTiposDeDocumento;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionAlmacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRececpcionNombreAlmacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionTipoDocumento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionNumero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionNotaFiscal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionDocEntrada;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionFechaIngreso;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionHoraIngreso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionUsuarioIngreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionArchivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionCantidadPallets;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionCantidadCajas;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRecepcionCantidadUnidades;

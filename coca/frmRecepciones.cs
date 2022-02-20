@@ -21,6 +21,18 @@ namespace coca
         {
             dtpFechaDesde.Value = DateTime.Now.AddDays(-2);
             dtpFechaHasta.Value = dtpFechaDesde.Value.AddDays(+1);
+
+            Dictionary<string, string> tiposDeDocumento = new Dictionary<string, string>();
+            tiposDeDocumento = TipoDeDocumento.Obtener();
+
+            cmbTiposDeDocumento.Items.Add("*Todos");
+            cmbClientes.Items.Add("*Todos");
+
+            foreach (KeyValuePair<string, string> kvp in tiposDeDocumento)
+                cmbTiposDeDocumento.Items.Add(kvp.Value);
+
+            cmbClientes.SelectedIndex = 0;
+            cmbTiposDeDocumento.SelectedIndex = 0;
         }
 
         private void btnRefrescar_Click(object sender, EventArgs e)
@@ -30,27 +42,26 @@ namespace coca
 
             dgvRecepciones.Rows.Clear();
 
-            object[] valores = new object[10];
+            object[] valores = new object[12];
 
             foreach (Documento d in documentos)
             {
                 valores[0] = d.CodigoDeAlmacen;
                 valores[1] = d.NombreDeAlmacen;
-                valores[2] = "";
+                valores[2] = d.Tipo.Descripcion;
                 valores[3] = d.Numero.ToString();
-                valores[4] = d.FechaIngreso.ToString("dd-MM-yyyy");
-                valores[5] = d.FechaIngreso.ToString("HH.mm.ss");
-                valores[6] = d.UsuarioDeAlta;
-                valores[7] = d.CantidadDePallets;
-                valores[8] = d.CantidadDeCajas;
-                valores[9] = d.CantidadDeUnidades;
+                valores[4] = d.NumeroDocumentoDeEntrada.ToString();
+                valores[5] = d.NumeroNotaFiscal.ToString();
+                valores[6] = d.FechaHoraDeAlta.ToString("dd-MM-yyyy");
+                valores[7] = d.FechaHoraDeAlta.ToString("HH.mm.ss");
+                valores[8] = d.NombreArchivoDeTransmision;
+                valores[9] = d.CantidadDePallets;
+                valores[10] = d.CantidadDeCajas;
+                valores[11] = d.CantidadDeUnidades;
                 dgvRecepciones.Rows.Add(valores);
-                
             }
 
-
             tslCantidadDeRecepciones.Text = dgvRecepciones.Rows.Count.ToString();
-
         }
     }
 }

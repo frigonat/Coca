@@ -125,6 +125,7 @@ namespace coca
             // 
             // frmLogin_iSeries
             // 
+            this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(352, 177);
@@ -142,6 +143,7 @@ namespace coca
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin_iSeries";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Iniciar sesión en IBM i";
             this.Load += new System.EventHandler(this.frmLogin_iSeries_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

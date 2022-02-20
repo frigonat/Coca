@@ -15,10 +15,15 @@ namespace coca
     class iSeries
     {
         public const int intevaloValidezDeCredenciales = 240;    //4 horas = 240 minutos
-  
+
+
         /// <summary>
         /// Obtiene las credenciales para conectarse al Db2 for i
         /// </summary>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="CredencialesNoValidasException"></exception>
+        /// <exception cref="CredencialesExpiradasException"></exception>
         public static List<string> ObtenerCredenciales()
         {
             Assembly myAssembly = Assembly.GetExecutingAssembly();

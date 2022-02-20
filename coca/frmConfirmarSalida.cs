@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace coca
 {
-    public partial class frmAcercaDe : Form
+    public partial class frmConfirmarSalida : Form
     {
-        public frmAcercaDe()
+        public frmConfirmarSalida()
         {
             InitializeComponent();
-        }
-
-        private void btnAceptar_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

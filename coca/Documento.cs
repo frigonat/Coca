@@ -21,9 +21,9 @@ namespace coca
         private int numero;
 
         /// <summary>
-        /// Fecha de ingreso del documento.-
+        /// Tipo del documento.-
         /// </summary>
-        private DateTime fechaIngreso;
+        private TipoDeDocumento tipo;
 
         /// <summary>
         /// Almacén al que pertenece el documento.-
@@ -33,17 +33,22 @@ namespace coca
         /// <summary>
         /// Número del documento de entrada que ampara el documento.-
         /// </summary>
-        private int numeroDocumentoDeEntrada;
+        private string numeroDocumentoDeEntrada;
 
         /// <summary>
         /// Número de la nota fiscal que ampara el documento.-
         /// </summary>
-        private int numeroNotaFiscal;
+        private string numeroNotaFiscal;
 
         /// <summary>
         /// Estado del documento.-
         /// </summary>
         private EstadosDeDocumento estado;
+
+        /// <summary>
+        /// Código de Evento para el documento.-
+        /// </summary>
+        private string evento;
 
         /// <summary>
         /// Fecha y hora en la que se realizó el alta del documento.-
@@ -56,9 +61,9 @@ namespace coca
         private string usuarioDeAlta;
 
         /// <summary>
-        /// Nombre del dispositivo desde el cual se produjo el alta del documento.-
+        /// Nombre del archivo de transmisión.-
         /// </summary>
-        private string pantallaDeAlta;
+        private string nombreArchivoDeTransmision;
 
         /// <summary>
         /// Fecha y hora en la que se realizó el proceso del documento.-
@@ -103,11 +108,12 @@ namespace coca
         }
 
         /// <summary>
-        /// Obtiene la fecha de ingreso del documento.-
+        /// Obtiene el tipo de documento.-
         /// </summary>
-        public DateTime FechaIngreso
-        {
-            get { return fechaIngreso ; }
+        public TipoDeDocumento Tipo 
+        { 
+            get { return this.tipo; } 
+            
         }
 
         /// <summary>
@@ -129,7 +135,7 @@ namespace coca
         /// <summary>
         /// Obtiene el número de documento.-
         /// </summary>
-        public int NumeroDocumentoDeEntrada
+        public string NumeroDocumentoDeEntrada
         {
             get { return this.numeroDocumentoDeEntrada; }
         }
@@ -137,9 +143,20 @@ namespace coca
         /// <summary>
         /// Obtiene el número de nota fiscal del documento.-
         /// </summary>
-        public int NumeroNotaFiscal
+        public string NumeroNotaFiscal
         {
             get { return this.numeroNotaFiscal; }
+        }
+
+        //estado
+
+        /// <summary>
+        /// Obtiene el código de Evento para el documento.-
+        /// </summary>
+        /// <returns></returns>
+        public string Evento
+        {
+            get { return this.evento; }
         }
 
         /// <summary>
@@ -160,11 +177,11 @@ namespace coca
         }
 
         /// <summary>
-        /// Obtiene el nombre del dispositivo desde el cual se produjo el alta del documento.-
+        /// Nombre del archivo de transmisión.-
         /// </summary>
-        public string PantallaDeAlta
+        public string NombreArchivoDeTransmision
         {
-            get { return pantallaDeAlta; }
+            get { return this.nombreArchivoDeTransmision; }
         }
 
         /// <summary>
@@ -236,6 +253,7 @@ namespace coca
             iSeriesConnection cn;
             List<string> parametrosDeConexion = new List<string>();
             Almacen almacen;
+            TipoDeDocumento td;
 
             //Valida que el almacén recibido sea válido.-
             if (codigoAlmacenBuscado == "")
@@ -257,6 +275,16 @@ namespace coca
             //Valida que el Tipo de Documento sea válido.-
             if (tipoDocumentoBuscado == "")
                 throw new TipoDeDocumentoNoValidoException("El tipo de documento recibido no válido.");
+
+            try
+            {
+                td = new TipoDeDocumento(tipoDocumentoBuscado);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
 
             //Valida que el Número de Documento sea válido.-
             if (numeroDocumentoBuscado == 0)
@@ -309,13 +337,18 @@ namespace coca
                 DataTable palletsEncontrado;
 
                 // VARCHAR_FORMAT(timestamp_recepcion ,'yyyy-mm-dd')
-
-                this.almacen = almacen;
                 this.numero = numeroDocumentoBuscado;
-                this.fechaIngreso = documentoBuscado.Rows[0].Field<DateTime>("TIMESTAMP_RECEPCION");
-                this.numeroNotaFiscal = 0;
-                this.numeroDocumentoDeEntrada = 0;
+                this.tipo = td;
+                this.almacen = almacen;
+                this.numeroDocumentoDeEntrada = documentoBuscado.Rows[0].Field<string>("NRO_DOC_RECEPCION").Trim();
+                this.numeroNotaFiscal = documentoBuscado.Rows[0].Field<string>("NOTA_FISCAL").Trim();
+                this.fechaHoraDeAlta = documentoBuscado.Rows[0].Field<DateTime>("TIMESTAMP_RECEPCION");
                 this.usuarioDeAlta = documentoBuscado.Rows[0].Field<string>("USUARIO_RECEPCION");
+                this.usuarioDeProceso = documentoBuscado.Rows[0].Field<string>("USUARIO_PROCESO");
+                this.fechaHoraDeProceso = documentoBuscado.Rows[0].Field<DateTime>("FECHA_PROCESO");
+                this.pantallaDeProceso = "*Ninguna";
+                this.evento = documentoBuscado.Rows[0].Field<string>("NRO_PROCESO");
+                this.nombreArchivoDeTransmision = documentoBuscado.Rows[0].Field<string>("ARCHIVO");   
 
                 try
                 {
@@ -354,7 +387,6 @@ namespace coca
                 mensaje = "No se ha encontrado un documento con los datos especificados (" + ")";
                 Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Notificacion, objetoDeNegocio, 0, nombreBitacora);
                 throw new DocumentoNoEncontradoException(mensaje);
-                
             }
         }
         

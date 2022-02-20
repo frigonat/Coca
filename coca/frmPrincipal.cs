@@ -21,14 +21,46 @@ namespace coca
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            //barra de estado
-            tslConexion_iSeries.Text = "No hay conexión a base de datos";
+            try
+            {
+                parametrosDeConexion = iSeries.ObtenerCredenciales();
+                tslConexion_iSeries.Text = "Conectado a base de datos " + parametrosDeConexion[0];
+                tslConexion_iSeries.BackColor = Color.LimeGreen;
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    frmLogin_iSeries f = new frmLogin_iSeries();
 
+                    if (f.Mostrar() == DialogResult.OK)
+                    {
+                        parametrosDeConexion = iSeries.ObtenerCredenciales();
+                        tslConexion_iSeries.Text = "Conectado a base de datos " + parametrosDeConexion[0];
+                        tslConexion_iSeries.BackColor = Color.LimeGreen;
+                    }
+                    else
+                    {
+                        tslConexion_iSeries.Text = "No hay conexión a base de datos";
+                        tslConexion_iSeries.BackColor = Color.PaleVioletRed;
+                    }
+                }
+                catch (Exception otraEx)
+                {
+                    string error = otraEx.Message;
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        private void recepcionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRecepciones f = new frmRecepciones();
+            mostrarFormulario(f);
         }
 
         private void tslConexion_iSeries_Click(object sender, EventArgs e)
         {
-            
             try
             {
                 frmLogin_iSeries f = new frmLogin_iSeries();
@@ -37,9 +69,11 @@ namespace coca
                 {
                     parametrosDeConexion = iSeries.ObtenerCredenciales();
                     tslConexion_iSeries.Text = "Conectado a base de datos " + parametrosDeConexion[0];
+                    tslConexion_iSeries.BackColor = Color.LimeGreen;
                 }
                 else
                 {
+                    tslConexion_iSeries.BackColor = Color.PaleVioletRed;
                     tslConexion_iSeries.Text = "No hay conexión a base de datos";
                 }
             }
@@ -82,10 +116,10 @@ namespace coca
             }
         }
 
-        private void recepcionesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmRecepciones f = new frmRecepciones();
-            mostrarFormulario(f);
+            frmAcercaDe f = new frmAcercaDe();
+            f.ShowDialog();
         }
     }
 }
