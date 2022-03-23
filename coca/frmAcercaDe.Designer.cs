@@ -72,7 +72,7 @@
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(114, 23);
             this.lblVersion.TabIndex = 3;
-            this.lblVersion.Text = "Versión 0.0.0.1";
+            this.lblVersion.Text = "Versión 1.0.0.0";
             this.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
@@ -102,7 +102,7 @@
             this.MinimizeBox = false;
             this.Name = "frmAcercaDe";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Acerca de";
+            this.Text = "Acerca de Coca";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

@@ -103,19 +103,19 @@ namespace coca
             TipoDeDocumento td;
 
             td = new TipoDeDocumento("I");
-            listaParaDevolver.Add(td.Codigo, td.Descripcion);
+            listaParaDevolver.Add(td.Descripcion, td.Codigo);
 
             td = new TipoDeDocumento("P");
-            listaParaDevolver.Add(td.Codigo, td.Descripcion);
+            listaParaDevolver.Add(td.Descripcion, td.Codigo);
 
             td = new TipoDeDocumento("R");
-            listaParaDevolver.Add(td.Codigo, td.Descripcion);
+            listaParaDevolver.Add(td.Descripcion, td.Codigo);
 
             td = new TipoDeDocumento("D");
-            listaParaDevolver.Add(td.Codigo, td.Descripcion);
+            listaParaDevolver.Add(td.Descripcion, td.Codigo);
 
             td = new TipoDeDocumento("F");
-            listaParaDevolver.Add(td.Codigo, td.Descripcion);
+            listaParaDevolver.Add(td.Descripcion, td.Codigo);
 
             return listaParaDevolver;
         }

@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace coca
 {
-    public partial class frmCompanies : Form
+    public partial class frmConexionDb2 : Form
     {
-        public frmCompanies()
+        public frmConexionDb2()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            List<Compania> companias = new List<Compania>();
-
-            companias = Compania.Obtener();
         }
     }
 }

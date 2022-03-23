@@ -95,6 +95,46 @@ namespace coca
         /// </summary>
         private int cantidadDeUnidades;
 
+        /// <summary>
+        /// Lista de Pallets del documento.-
+        /// </summary>
+        private List<Pallet> pallets;
+
+        /// <summary>
+        /// Lista de Cajas del documento.-
+        /// </summary>
+        private List<Caja> cajas;
+
+        /// <summary>
+        /// Lista de Unidades del documento.-
+        /// </summary>
+        private List<Unidad> unidades;
+
+        /// <summary>
+        /// Número del CNPJ de origen en el sobre SOAP.-
+        /// </summary>
+        private string cnpjSOAP_Sender;
+
+        /// <summary>
+        /// Número del CNPJ de destino en el sobre SOAP.-
+        /// </summary>
+        private string cnpjSOAP_Receiver;
+
+        /// <summary>
+        /// Número de CNPJ de Partner.-
+        /// </summary>
+        private string cnpjPartner;
+
+        /// <summary>
+        /// Número de CNPJ del Transportista, según ANVISA.-
+        /// </summary>
+        private string cnpjTransporte;
+
+        /// <summary>
+        /// Número de CNPJ del Declarante, según ANVISA.
+        /// </summary>
+        private string cnpjDeclarante;
+
         #endregion
 
         #region propiedades
@@ -102,18 +142,18 @@ namespace coca
         /// <summary>
         /// Obtiene el número del documento.-
         /// </summary>
-        public int Numero 
+        public int Numero
         {
-            get { return numero; } 
+            get { return numero; }
         }
 
         /// <summary>
         /// Obtiene el tipo de documento.-
         /// </summary>
-        public TipoDeDocumento Tipo 
-        { 
-            get { return this.tipo; } 
-            
+        public TipoDeDocumento Tipo
+        {
+            get { return this.tipo; }
+
         }
 
         /// <summary>
@@ -123,13 +163,21 @@ namespace coca
         {
             get { return this.almacen.Codigo; }
         }
-        
+
         /// <summary>
         /// Obtiene el nombre del almacén del documento.-
         /// </summary>
         public string NombreDeAlmacen
         {
             get { return this.almacen.Nombre; }
+        }
+
+        /// <summary>
+        /// Obtiene el CNPJ del almacén.-
+        /// </summary>
+        public string CNPJ_Almacen
+        {
+            get { return this.almacen.CNPJ; }
         }
 
         /// <summary>
@@ -148,7 +196,13 @@ namespace coca
             get { return this.numeroNotaFiscal; }
         }
 
-        //estado
+        /// <summary>
+        /// Obtiene el Estado del documento.-
+        /// </summary>
+        public EstadosDeDocumento Estado
+        {
+            get { return this.estado; }
+        }
 
         /// <summary>
         /// Obtiene el código de Evento para el documento.-
@@ -232,8 +286,47 @@ namespace coca
             get { return this.cantidadDeUnidades; }
         }
 
-        #endregion
+        /// <summary>
+        /// Obtiene el número del CNPJ de origen en el sobre SOAP.-
+        /// </summary>
+        public string CnpjSOAP_Sender
+        {
+            get { return this.cnpjSOAP_Sender; } 
+        }
 
+        /// <summary>
+        /// Obtiene el número del CNPJ de destino en el sobre SOAP.-
+        /// </summary>
+        public string CnpjSOAP_Receiver
+        {
+            get { return this.cnpjSOAP_Receiver; }
+        }
+
+        /// <summary>
+        /// Obtiene el CNPJ del partner.-
+        /// </summary>
+        public string CnpjPartner
+        { 
+            get { return this.cnpjPartner; }
+        }
+
+        /// <summary>
+        /// Obtiene el CNPJ del Transportista, según ANVISA.
+        /// </summary>
+        public string CnpjTransporte
+        {
+            get { return this.cnpjTransporte; }
+        }
+
+        /// <summary>
+        /// Obtiene el CNPJ del Declarante, según ANVISA.
+        /// </summary>
+        public string CnpjDeclarante
+        {
+            get { return this.cnpjDeclarante; }
+        }
+
+        #endregion
 
         /// <summary>
         /// Nombre de la bitácora de datos comunes.-
@@ -245,6 +338,16 @@ namespace coca
         /// </summary>
         private const string objetoDeNegocio = "Documento";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="codigoAlmacenBuscado"></param>
+        /// <param name="tipoDocumentoBuscado"></param>
+        /// <param name="numeroDocumentoBuscado"></param>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="TipoDeDocumentoNoValidoException"></exception>
+        /// <exception cref="DocumentoNoValidoException"></exception>
+        /// <exception cref="DocumentoNoEncontradoException"></exception>
         public Documento(string codigoAlmacenBuscado, string tipoDocumentoBuscado, int numeroDocumentoBuscado)
         {
             string iSQL = "";
@@ -252,7 +355,7 @@ namespace coca
             DataTable documentoBuscado;
             iSeriesConnection cn;
             List<string> parametrosDeConexion = new List<string>();
-            Almacen almacen;
+            Almacen almacen = null;
             TipoDeDocumento td;
 
             //Valida que el almacén recibido sea válido.-
@@ -266,9 +369,9 @@ namespace coca
                 {
                     almacen = new Almacen(codigoAlmacenBuscado);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    //
                 }
             }
 
@@ -285,6 +388,7 @@ namespace coca
 
                 throw ex;
             }
+
 
             //Valida que el Número de Documento sea válido.-
             if (numeroDocumentoBuscado == 0)
@@ -348,17 +452,41 @@ namespace coca
                 this.fechaHoraDeProceso = documentoBuscado.Rows[0].Field<DateTime>("FECHA_PROCESO");
                 this.pantallaDeProceso = "*Ninguna";
                 this.evento = documentoBuscado.Rows[0].Field<string>("NRO_PROCESO");
-                this.nombreArchivoDeTransmision = documentoBuscado.Rows[0].Field<string>("ARCHIVO");   
+                this.nombreArchivoDeTransmision = documentoBuscado.Rows[0].Field<string>("ARCHIVO");
+
+                EstadosDeDocumento estadoActual;
+                if (Enum.TryParse(documentoBuscado.Rows[0].Field<string>("ESTADO").ToString(), out estadoActual))
+                {
+                    if (Enum.IsDefined(typeof(EstadosDeDocumento), estadoActual))
+                    {
+                        this.estado = estadoActual;
+                    }
+                    else
+                    {
+                        mensaje = "No se puede determinar el estado del documento " + this.Numero.ToString();
+                        Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                        throw new DocumentoNoValidoException(mensaje);
+                    }
+                }
+
+                this.cnpjSOAP_Sender = documentoBuscado.Rows[0].Field<string>("PARTNER_FROM");
+                this.cnpjSOAP_Receiver = documentoBuscado.Rows[0].Field<string>("PARTNER_TO");
 
                 try
                 {
                     cn.Open();
 
-                    iSQL = "SELECT DISTINCT (ttpal) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + numeroDocumentoBuscado;
+                    iSQL = "SELECT * FROM BOSS06FLT.SER001F1 WHERE trim(TTIDDOC) = '" + numeroDocumentoBuscado.ToString() + "' FETCH FIRST ROW ONLY";
+                    documentoBuscado = cn.ExecuteQuery(iSQL);
+                    this.cnpjDeclarante = documentoBuscado.Rows[0].Field<object>("TTCNPJC").ToString();
+                    this.cnpjPartner = documentoBuscado.Rows[0].Field<object>("TTGS1").ToString();
+                    this.cnpjTransporte = documentoBuscado.Rows[0].Field<object>("TTCNPJT").ToString();
+
+                    iSQL = "SELECT DISTINCT (ttpal) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + numeroDocumentoBuscado + " AND ttpal <> ''";
                     palletsEncontrado = cn.ExecuteQuery(iSQL);
                     this.cantidadDePallets = palletsEncontrado.Rows.Count;
 
-                    iSQL = "SELECT COUNT(ttcx) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + numeroDocumentoBuscado;
+                    iSQL = "SELECT COUNT(ttcx) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + numeroDocumentoBuscado + " AND ttcx <> ''";
                     ax = cn.ExecuteScalar(iSQL);
                     if (ax is DBNull)
                         this.cantidadDeCajas= 0;
@@ -409,6 +537,28 @@ namespace coca
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <param name="numeroLote"></param>
+        /// <returns></returns>
+        public static List<Documento> Obtener(DateTime fechaDesde, DateTime fechaHasta, string numeroLote)
+        {
+            string iSQL = "";
+
+            iSQL = "SELECT ID, ARCHIVO, GGLOTE, ALMACEN, TIPO_DOCUMENTO, COUNT(*) FROM BOSS06FLT.SER001A0 ";
+            iSQL += "LEFT JOIN BOSS06FLT.SER001F2 ON ID = GGIDDOC ";
+            iSQL += "WHERE VARCHAR_FORMAT(timestamp_recepcion ,'yyyy-mm-dd') BETWEEN '";
+            iSQL += fechaDesde.ToString("yyyy-MM-dd") + "' AND '" + fechaHasta.ToString("yyyy-MM-dd") + "' ";
+            iSQL += "AND trim(GGLOTE) = '" + numeroLote + "' ";
+            iSQL += "GROUP BY ID, ARCHIVO, GGLOTE, ALMACEN, TIPO_DOCUMENTO ";
+            iSQL += "ORDER BY 1";
+
+            return obtener(iSQL);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="iSQL"></param>
         /// <returns></returns>
         private static List<Documento> obtener(string iSQL)
@@ -432,7 +582,7 @@ namespace coca
             {
                 cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
                 cn.Open();
-                registrosEncontrados = cn.ExecuteQuery(iSQL);
+                registrosEncontrados = cn.ExecuteQuery(iSQL, 0);
                 cn.Close();
             }
             catch (Exception ex)
@@ -476,21 +626,244 @@ namespace coca
         }
 
         /// <summary>
-        /// Lista de Pallets del documento.-
+        /// 
         /// </summary>
-        private List<Pallet> pallets;
+        /// <returns></returns>
+        public List<Pallet> ObtenerPallets()
+        {
+            recuperarPallets();
+            return this.pallets;
+        }
 
         /// <summary>
-        /// Lista de Cajas del documento.-
+        /// 
         /// </summary>
-        private List<Caja> cajas;
+        /// <exception cref="Exception"></exception>
+        private void recuperarPallets()
+        {
+            string iSQL = "";
+            string mensaje = "";
+            DataTable palletsEncontrados;
+            iSeriesConnection cn;
+            List<string> listaParaDevolver = new List<string>();
+            List<string> parametrosDeConexion = new List<string>();
+
+            this.pallets = new List<Pallet>();
+
+            iSQL = "SELECT DISTINCT (ttpal) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + this.Numero.ToString();
+
+            try
+            {
+                parametrosDeConexion = iSeries.ObtenerCredenciales();
+            }
+            catch (Exception ex)
+            {
+                parametrosDeConexion = null;
+                throw ex;
+            }
+
+            try
+            {
+                cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
+                cn.Open();
+                palletsEncontrados = cn.ExecuteQuery(iSQL);
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                //Se anotan las excepciones de error en la bitácora.-
+                mensaje = "No se ha podido instanciar el documento con los datos recibidos. Mensajes posteriores pueden contener mayor información.-";
+                Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+
+                Exception excepcionActual = ex;
+                while (excepcionActual != null)
+                {
+                    mensaje = excepcionActual.Message;
+                    Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                    excepcionActual = excepcionActual.InnerException;
+                }
+
+                //Se arroja la excepción para que la procese el método llamador.-
+                throw new Exception(ex.Message);
+            }
+
+            foreach (DataRow fila in palletsEncontrados.Rows)
+            {
+                this.pallets.Add(new Pallet(fila.Field<string>("TTPAL"), this.Numero, false));
+            }
+        }
 
         /// <summary>
-        /// Lista de Unidades del documento.-
+        /// 
         /// </summary>
-        private List<Unidad> unidades;
+        private void recuperarCajas()
+        {
 
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<string> ObtenerLotes()
+        {
+            List<string> listaParaDevolver = new List<string>();
+            List<string> parametrosDeConexion = new List<string>();
+            iSeriesConnection cn;
+            DataTable registrosEncontrados = null;
 
+            string iSQL = "SELECT DISTINCT(GGLOTE) FROM BOSS06FLT.SER001F2 WHERE GGIDDOC = " + this.Numero.ToString();
+
+            try
+            {
+                parametrosDeConexion = iSeries.ObtenerCredenciales();
+            }
+            catch (Exception ex)
+            {
+                parametrosDeConexion = null;
+                throw ex;
+            }
+
+            try
+            {
+                cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
+                cn.Open();
+                registrosEncontrados = cn.ExecuteQuery(iSQL);
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                Bitacora.AgregarEntrada("Han aparecido errores al intentar obtener los lotes del archivo documento actual. Puede haber excepciones internas con mayor detalle.-", TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+
+                Exception excepcionActual = ex;
+                while (excepcionActual != null)
+                {
+                    Bitacora.AgregarEntrada(excepcionActual.Message, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                    excepcionActual = ex.InnerException;
+                }
+            }
+
+            if (registrosEncontrados != null)
+            {
+                foreach (DataRow fila in registrosEncontrados.Rows)
+                    listaParaDevolver.Add(fila.Field<string>("GGLOTE"));
+            }
+
+            return listaParaDevolver;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<string> ObtenerUnidades()
+        {
+            List<string> listaParaDevolver = new List<string>();
+            List<string> parametrosDeConexion = new List<string>();
+            iSeriesConnection cn;
+            DataTable registrosEncontrados = null;
+
+            string iSQL = "SELECT DISTINCT(GGSKU) FROM BOSS06FLT.SER001F2 WHERE GGIDDOC = " + this.Numero.ToString();
+
+            try
+            {
+                parametrosDeConexion = iSeries.ObtenerCredenciales();
+            }
+            catch (Exception ex)
+            {
+                parametrosDeConexion = null;
+                throw ex;
+            }
+
+            try
+            {
+                cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
+                cn.Open();
+                registrosEncontrados = cn.ExecuteQuery(iSQL);
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                Bitacora.AgregarEntrada("Han aparecido errores al intentar obtener los lotes del archivo documento actual. Puede haber excepciones internas con mayor detalle.-", TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+
+                Exception excepcionActual = ex;
+                while (excepcionActual != null)
+                {
+                    Bitacora.AgregarEntrada(excepcionActual.Message, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                    excepcionActual = ex.InnerException;
+                }
+            }
+
+            if (registrosEncontrados != null)
+            {
+                foreach (DataRow fila in registrosEncontrados.Rows)
+                    listaParaDevolver.Add(fila.Field<string>("GGSKU"));
+            }
+
+            return listaParaDevolver;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ssccPallet"></param>
+        /// <returns></returns>
+        public List<string> ObtenerCajas(string ssccPallet)
+        {
+            List<string> listaParaDevolver = new List<string>();
+            List<string> parametrosDeConexion = new List<string>();
+            iSeriesConnection cn;
+            DataTable registrosEncontrados = null;
+
+            string iSQL = "SELECT ttcx FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + this.Numero.ToString() + " AND TTPAL = '" + ssccPallet.Trim() + "'";
+
+            try
+            {
+                parametrosDeConexion = iSeries.ObtenerCredenciales();
+            }
+            catch (Exception ex)
+            {
+                parametrosDeConexion = null;
+                throw ex;
+            }
+
+            try
+            {
+                cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
+                cn.Open();
+                registrosEncontrados = cn.ExecuteQuery(iSQL);
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                Bitacora.AgregarEntrada("Han aparecido errores al intentar obtener las cajas del pallet " + ssccPallet + ". Puede haber excepciones internas con mayor detalle.-", TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+
+                Exception excepcionActual = ex;
+                while (excepcionActual != null)
+                {
+                    Bitacora.AgregarEntrada(excepcionActual.Message, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                    excepcionActual = ex.InnerException;
+                }
+            }
+
+            if (registrosEncontrados != null)
+            {
+                foreach (DataRow fila in registrosEncontrados.Rows)
+                    listaParaDevolver.Add(fila.Field<string>("ttcx"));
+            }
+
+            return listaParaDevolver;
+
+        }
     }
+
+
+
+
 }
+

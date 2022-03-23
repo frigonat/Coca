@@ -121,7 +121,7 @@
     <value>Aplicación de consulta para los documentos de series recibidos/transmitidos por y hacia los sistemas de clientes.  
 
 AppConfig                            2.0.0.0
-iSeriesConnection	                1.0.0.0
+iSeriesConnection	                2.0.0.0
 Trinidad.DatosComunes      1.1.0.0
 Trinidad.Auditoria                2.0.3.0
 

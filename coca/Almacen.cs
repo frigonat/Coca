@@ -18,9 +18,14 @@ namespace coca
         private string codigo;
 
         /// <summary>
-        /// Nombre del almacén-
+        /// Nombre del almacén.-
         /// </summary>
         private string nombre;
+
+        /// <summary>
+        /// CNPJ del almacén.-
+        /// </summary>
+        private string cnpj;
 
         #endregion
 
@@ -41,6 +46,14 @@ namespace coca
         {
             get { return this.nombre; }
 
+        }
+
+        /// <summary>
+        /// Obtiene el CNPJ del almacén.-
+        /// </summary>
+        public string CNPJ
+        {
+            get { return this.cnpj; }   
         }
 
         #endregion
@@ -104,8 +117,19 @@ namespace coca
                     excepcionActual = excepcionActual.InnerException;
                 }
             }
-            this.codigo = almacenBuscado.Rows[0].Field<string>("WHWHS");
-            this.nombre= almacenBuscado.Rows[0].Field<string>("WHDESC");
+
+            if (almacenBuscado.Rows.Count == 0)
+            {
+                this.codigo = codigoBuscado;
+                this.nombre = "Almacén no encontrado";
+                this.cnpj = "*Desconocido";
+            }
+            else
+            {
+                this.codigo = almacenBuscado.Rows[0].Field<string>("WHWHS");
+                this.nombre = almacenBuscado.Rows[0].Field<string>("WHDESC");
+                this.cnpj = "999999999999";
+            }
         }
 
         /// <summary>

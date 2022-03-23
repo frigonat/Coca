@@ -15,7 +15,8 @@ namespace coca
     class iSeries
     {
         public const int intevaloValidezDeCredenciales = 240;    //4 horas = 240 minutos
-
+        private static string archivoCredenciales = "ibmi.series";
+        private static string rutaCredenciales;
 
         /// <summary>
         /// Obtiene las credenciales para conectarse al Db2 for i
@@ -27,8 +28,6 @@ namespace coca
         public static List<string> ObtenerCredenciales()
         {
             Assembly myAssembly = Assembly.GetExecutingAssembly();
-            string rutaCredenciales;
-            string archivoCredenciales = "ibmi.series";
             List<string> parametrosDeConexion;
 
             myAssembly = Assembly.GetExecutingAssembly();
@@ -74,5 +73,25 @@ namespace coca
 
             return parametrosDeConexion;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="FileNotFoundException"></exception>
+        public static void BorrarCredenciales()
+        {
+            Assembly myAssembly = Assembly.GetExecutingAssembly();
+
+
+            myAssembly = Assembly.GetExecutingAssembly();
+            rutaCredenciales = Path.GetDirectoryName(myAssembly.Location);
+
+            //Chequear si existe el archivo.-
+            if (!File.Exists(rutaCredenciales + Path.DirectorySeparatorChar + archivoCredenciales))
+                throw new FileNotFoundException("No se ha encontrado el archivo de credenciales.");
+
+            File.Delete(rutaCredenciales + Path.DirectorySeparatorChar + archivoCredenciales);
+        }
+
     }
 }

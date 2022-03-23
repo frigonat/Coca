@@ -21,36 +21,7 @@ namespace coca
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            try
-            {
-                parametrosDeConexion = iSeries.ObtenerCredenciales();
-                tslConexion_iSeries.Text = "Conectado a base de datos " + parametrosDeConexion[0];
-                tslConexion_iSeries.BackColor = Color.LimeGreen;
-            }
-            catch (Exception ex)
-            {
-                try
-                {
-                    frmLogin_iSeries f = new frmLogin_iSeries();
-
-                    if (f.Mostrar() == DialogResult.OK)
-                    {
-                        parametrosDeConexion = iSeries.ObtenerCredenciales();
-                        tslConexion_iSeries.Text = "Conectado a base de datos " + parametrosDeConexion[0];
-                        tslConexion_iSeries.BackColor = Color.LimeGreen;
-                    }
-                    else
-                    {
-                        tslConexion_iSeries.Text = "No hay conexión a base de datos";
-                        tslConexion_iSeries.BackColor = Color.PaleVioletRed;
-                    }
-                }
-                catch (Exception otraEx)
-                {
-                    string error = otraEx.Message;
-                    MessageBox.Show(error);
-                }
-            }
+            conectarConDb2();
         }
 
         private void recepcionesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,6 +91,83 @@ namespace coca
         {
             frmAcercaDe f = new frmAcercaDe();
             f.ShowDialog();
+        }
+
+        private void confirmacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDocumentoRecepcion f = new frmDocumentoRecepcion();
+            f.Mostrar();
+        }
+
+        private void desconectarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                iSeries.BorrarCredenciales();
+                tslConexion_iSeries.BackColor = Color.PaleVioletRed;
+                tslConexion_iSeries.Text = "No hay conexión a base de datos";
+                conectarToolStripMenuItem.Enabled = true;
+                desconectarToolStripMenuItem.Enabled = false;
+                verConexiónToolStripMenuItem.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conectarConDb2();
+        }
+
+        private void conectarConDb2()
+        {
+            try
+            {
+                parametrosDeConexion = iSeries.ObtenerCredenciales();
+                tslConexion_iSeries.Text = "Conectado a base de datos " + parametrosDeConexion[0];
+                tslConexion_iSeries.BackColor = Color.LimeGreen;
+                conectarToolStripMenuItem.Enabled = false;
+                desconectarToolStripMenuItem.Enabled = true;
+                verConexiónToolStripMenuItem.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    frmLogin_iSeries f = new frmLogin_iSeries();
+
+                    if (f.Mostrar() == DialogResult.OK)
+                    {
+                        parametrosDeConexion = iSeries.ObtenerCredenciales();
+                        tslConexion_iSeries.Text = "Conectado a base de datos " + parametrosDeConexion[0];
+                        tslConexion_iSeries.BackColor = Color.LimeGreen;
+                        conectarToolStripMenuItem.Enabled = false;
+                        desconectarToolStripMenuItem.Enabled = true;
+                        verConexiónToolStripMenuItem.Enabled = true;
+                    }
+                    else
+                    {
+                        tslConexion_iSeries.Text = "No hay conexión a base de datos";
+                        tslConexion_iSeries.BackColor = Color.PaleVioletRed;
+                        conectarToolStripMenuItem.Enabled = true;
+                        desconectarToolStripMenuItem.Enabled = false;
+                        verConexiónToolStripMenuItem.Enabled = false;
+                    }
+                }
+                catch (Exception otraEx)
+                {
+                    string error = otraEx.Message;
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        private void tslRecepciones_Click(object sender, EventArgs e)
+        {
+            frmRecepciones f = new frmRecepciones();
+            mostrarFormulario(f);
         }
     }
 }

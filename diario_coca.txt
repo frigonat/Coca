@@ -32,6 +32,25 @@ Agregué el formulario AcercaDe y lo llamé desde el menú correspondiente
 Para continuar:
 Seguir puliendo la GUI para que verifique / solicite credenciales
 
+Formulario de Recepción:
+	> Cargar el TreeView con las cajas / Unidades
+
+Formulario de Consulta de Recepciones
+	> Form Size & Position
+
+Formulario de Consulta de Confirmaciones
+	> Form Size & Position
+Formulario de Búsqueda de Etiquetas
+Fomrulario de Consulta de Datos de Conexión
+
+
+
+
+Parametros
+
+> Conectar con Db2 al inciar
+> Confirmar salida
+> Rango de Fechas para recepciones/confirmaciones
 
 
 

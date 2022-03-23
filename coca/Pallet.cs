@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Trinidad.Auditoria;
 
 namespace coca
 {   
@@ -11,8 +13,12 @@ namespace coca
     /// </summary>
     public class Pallet
     {
-
         #region atributos
+
+        /// <summary>
+        /// Número de documento al que pertence el pallet.-
+        /// </summary>
+        int numeroDocumento;
 
         /// <summary>
         /// Código SSCC del pallet.-
@@ -30,8 +36,16 @@ namespace coca
         List<Caja> cajas;
 
         #endregion
-        
+
         #region propiedades
+
+        /// <summary>
+        /// Obtiene el número de documento al que pertence el pallet.-
+        /// </summary>
+        public int NumeroDocumento
+        {
+            get { return this.numeroDocumento; }
+        }
 
         /// <summary>
         /// Obtiene el codigo SSCC del pallet.-
@@ -51,17 +65,88 @@ namespace coca
 
         #endregion
 
+
+        /// <summary>
+        /// Nombre de la bitácora de datos comunes.-
+        /// </summary>
+        private const string nombreBitacora = "coca";
+
+        /// <summary>
+        /// Nombre del objeto de negocios.-
+        /// </summary>
+        private const string objetoDeNegocio = "Pallet";
+
         /// <summary>
         /// Crea un nuevo 
         /// </summary>
         /// <param name="nuevoSSCC"></param>
-        public Pallet(string nuevoSSCC)
+        public Pallet(string nuevoSSCC, int nuevoNumeroDeDocumento)
         {
+            this.numeroDocumento = nuevoNumeroDeDocumento;
             this.codigoSSCC = nuevoSSCC;
-            this.cajas = new List<Caja>();
-            this.cantidadCajas = 0;
+            RecuperarCajas();
         }
 
+        /// <summary>
+        /// Crea un nuevo 
+        /// </summary>
+        /// <param name="nuevoSSCC"></param>
+        public Pallet(string nuevoSSCC, int nuevoNumeroDeDocumento, bool recuperarCaja)
+        {
+            this.numeroDocumento = nuevoNumeroDeDocumento;
+            this.codigoSSCC = nuevoSSCC;
+
+            if (recuperarCaja)
+                RecuperarCajas();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        public void RecuperarCajas()
+        {
+            string iSQL;
+            string mensaje;
+
+            List<string> parametrosDeConexion = iSeries.ObtenerCredenciales();
+            DataTable cajasEncontradas;
+            iSeriesConnection cn;
+            this.cajas = new List<Caja>();
+
+            iSQL = "SELECT DISTINCT(ttcx) FROM BOSS06FLT.SER001F1 WHERE trim(ttpal) = '" + this.CodigoSSCC + "'";
+            try
+            {
+                cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
+                cn.Open();
+                cajasEncontradas = cn.ExecuteQuery(iSQL);
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                //Se anotan las excepciones de error en la bitácora.-
+                mensaje = "No se han podido recuperar las cajas del pallet [" + this.CodigoSSCC + "]. Mensajes posteriores pueden contener mayor información.-";
+                Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+
+                Exception excepcionActual = ex;
+                while (excepcionActual != null)
+                {
+                    mensaje = excepcionActual.Message;
+                    Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                    excepcionActual = excepcionActual.InnerException;
+                }
+
+                //Se arroja la excepción para que la procese el método llamador.-
+                throw new Exception(ex.Message);
+            }
+            
+
+            foreach (DataRow fila in cajasEncontradas.Rows)
+                this.cajas.Add(new Caja(fila.Field<string>("ttcx"), this.NumeroDocumento));
+
+            this.cantidadCajas = cajasEncontradas.Rows.Count;
+        }
 
         /// <summary>
         /// Agrega una caja a la lista del pallet.-
@@ -82,7 +167,6 @@ namespace coca
             this.cajas.Find(x => x.CodigoSSCC == SSCC_caja).AgregarUnidad(nuevoDui);
         }
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -101,8 +185,6 @@ namespace coca
         {
             return this.cajas;
         }
-
-
 
     }
 }
