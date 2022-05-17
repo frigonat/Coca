@@ -64,9 +64,17 @@
     <Compile Include="Auditoria.cs" />
     <Compile Include="Caja.cs" />
     <Compile Include="Compania.cs" />
+    <Compile Include="Confirmacion.cs" />
     <Compile Include="Documento.cs" />
     <Compile Include="EstadosDeDocumento.cs" />
+    <Compile Include="EstadosDeSistema.cs" />
     <Compile Include="Exceptions.cs" />
+    <Compile Include="frmABMSistemas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmABMSistemas.designer.cs">
+      <DependentUpon>frmABMSistemas.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAcercaDe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,11 +93,23 @@
     <Compile Include="frmConexionDb2.Designer.cs">
       <DependentUpon>frmConexionDb2.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmConfirmaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfirmaciones.Designer.cs">
+      <DependentUpon>frmConfirmaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmConfirmarSalida.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmConfirmarSalida.Designer.cs">
       <DependentUpon>frmConfirmarSalida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDocumentoConfirmacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDocumentoConfirmacion.Designer.cs">
+      <DependentUpon>frmDocumentoConfirmacion.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDocumentoRecepcion.cs">
       <SubType>Form</SubType>
@@ -115,20 +135,39 @@
     <Compile Include="frmRecepciones.designer.cs">
       <DependentUpon>frmRecepciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSistemas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSistemas.designer.cs">
+      <DependentUpon>frmSistemas.cs</DependentUpon>
+    </Compile>
     <Compile Include="iSeries.cs" />
     <Compile Include="Pallet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sistema.cs" />
     <Compile Include="TipoDeDocumento.cs" />
     <Compile Include="Unidad.cs" />
+    <EmbeddedResource Include="frmABMSistemas.resx">
+      <DependentUpon>frmABMSistemas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAcercaDe.resx">
       <DependentUpon>frmAcercaDe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBusquedaEtiqueta.resx">
       <DependentUpon>frmBusquedaEtiqueta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmConexionDb2.resx">
+      <DependentUpon>frmConexionDb2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfirmaciones.resx">
+      <DependentUpon>frmConfirmaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmConfirmarSalida.resx">
       <DependentUpon>frmConfirmarSalida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDocumentoConfirmacion.resx">
+      <DependentUpon>frmDocumentoConfirmacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDocumentoRecepcion.resx">
       <DependentUpon>frmDocumentoRecepcion.cs</DependentUpon>
@@ -141,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRecepciones.resx">
       <DependentUpon>frmRecepciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSistemas.resx">
+      <DependentUpon>frmSistemas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -170,6 +212,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Coke.ico" />
+    <None Include="imagenes\ibm-power5.png" />
+    <None Include="imagenes\calf-icon_48.png" />
+    <None Include="imagenes\calf-icon_128.png" />
+    <None Include="imagenes\ibm-logo3d.jpg" />
+    <None Include="imagenes\LOGIBM_idgtv.jpg" />
+    <None Include="imagenes\-ibm-ix-logo-global.jpg" />
+    <None Include="imagenes\ibm_logo.png" />
     <None Include="imagenes\49590_boxes_customers_inventory_products_icon_64.png" />
     <None Include="imagenes\pills-strips-icon_48.png" />
     <None Include="imagenes\Actions-view-refresh-icon48.png" />

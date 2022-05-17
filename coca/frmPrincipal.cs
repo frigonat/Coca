@@ -95,8 +95,8 @@ namespace coca
 
         private void confirmacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmDocumentoRecepcion f = new frmDocumentoRecepcion();
-            f.Mostrar();
+            frmConfirmaciones f = new frmConfirmaciones();
+            mostrarFormulario(f);
         }
 
         private void desconectarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -167,6 +167,24 @@ namespace coca
         private void tslRecepciones_Click(object sender, EventArgs e)
         {
             frmRecepciones f = new frmRecepciones();
+            mostrarFormulario(f);
+        }
+
+        private void verConexiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConexionDb2 f = new frmConexionDb2();
+            f.ShowDialog();
+        }
+
+        private void tslConfirmaciones_Click(object sender, EventArgs e)
+        {
+            frmConfirmaciones f = new frmConfirmaciones();
+            mostrarFormulario(f);
+        }
+
+        private void sistemasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSistemas f = new frmSistemas();
             mostrarFormulario(f);
         }
     }

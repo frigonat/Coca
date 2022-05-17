@@ -101,8 +101,8 @@ namespace coca
 
             lblUsuarioDeProceso.Text = documentoActual.UsuarioDeProceso;
             lblEvento.Text = documentoActual.Evento;
+            lblEvtNotifId.Text = documentoActual.EvtNotifId;
             lblEstado.Text = documentoActual.Estado.ToString();
-
 
             lblPartnerOrigen.Text = documentoActual.CnpjSOAP_Sender;
             lblPartnerDestino.Text = documentoActual.CnpjSOAP_Receiver;

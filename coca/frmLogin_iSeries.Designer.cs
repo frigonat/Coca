@@ -54,7 +54,7 @@ namespace coca
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(236, 129);
+            this.btnCancelar.Location = new System.Drawing.Point(257, 129);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(73, 27);
             this.btnCancelar.TabIndex = 7;
@@ -84,14 +84,14 @@ namespace coca
             // 
             this.txtUsuario.Location = new System.Drawing.Point(177, 53);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(133, 21);
+            this.txtUsuario.Size = new System.Drawing.Size(153, 21);
             this.txtUsuario.TabIndex = 3;
             // 
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(177, 88);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(133, 21);
+            this.txtPassword.Size = new System.Drawing.Size(153, 21);
             this.txtPassword.TabIndex = 5;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
@@ -120,8 +120,9 @@ namespace coca
             this.cmbSistemas.FormattingEnabled = true;
             this.cmbSistemas.Location = new System.Drawing.Point(177, 20);
             this.cmbSistemas.Name = "cmbSistemas";
-            this.cmbSistemas.Size = new System.Drawing.Size(133, 21);
+            this.cmbSistemas.Size = new System.Drawing.Size(153, 21);
             this.cmbSistemas.TabIndex = 1;
+            this.cmbSistemas.SelectedIndexChanged += new System.EventHandler(this.cmbSistemas_SelectedIndexChanged);
             // 
             // frmLogin_iSeries
             // 

@@ -11,14 +11,14 @@ namespace coca
     /// <summary>
     /// Modela un documento que se permite consultar mendiante el sistema.-
     /// </summary>
-    public class Documento
+    public class Confirmacion
     {
         #region atributos
 
         /// <summary>
         /// Número del documento.-
         /// </summary>
-        private int numero;
+        private long numero;
 
         /// <summary>
         /// Tipo del documento.-
@@ -26,7 +26,7 @@ namespace coca
         private TipoDeDocumento tipo;
 
         /// <summary>
-        /// Almacén al que pertenece el documento.-
+        /// Almacén al que pertenece la confirmación.-
         /// </summary>
         private Almacen almacen;
 
@@ -41,22 +41,22 @@ namespace coca
         private string numeroNotaFiscal;
 
         /// <summary>
-        /// Estado del documento.-
+        /// Estado de la confirmación.-
         /// </summary>
         private EstadosDeDocumento estado;
 
         /// <summary>
-        /// Código de Evento para el documento.-
+        /// Código de Evento para la confirmación.-
         /// </summary>
         private string evento;
 
         /// <summary>
-        /// Fecha y hora en la que se realizó el alta del documento.-
+        /// Fecha y hora en la que se generó la confirmación.-
         /// </summary>
         private DateTime fechaHoraDeAlta;
 
         /// <summary>
-        /// Nombre del usuario de alta del documento.-
+        /// Nombre del usuario que generó la confirmación.-
         /// </summary>
         private string usuarioDeAlta;
 
@@ -66,32 +66,27 @@ namespace coca
         private string nombreArchivoDeTransmision;
 
         /// <summary>
-        /// Fecha y hora en la que se realizó el proceso del documento.-
+        /// Fecha y hora en la que se realizó el proceso de la confirmación.-
         /// </summary>
         private DateTime fechaHoraDeProceso;
 
         /// <summary>
-        /// Nombre del usuario que realizó el proceso del documento.-
+        /// Nombre del usuario que realizó el proceso de la confirmación.-
         /// </summary>
         private string usuarioDeProceso;
 
         /// <summary>
-        /// Obtiene el nombre del dispositivo desde el cual se procesó el documento.-
-        /// </summary>
-        private string pantallaDeProceso;
-
-        /// <summary>
-        /// Cantidad de pallets existentes en el documento de recepción.-
+        /// Cantidad de pallets existentes en la confirmación.-
         /// </summary>
         private int cantidadDePallets;
 
         /// <summary>
-        /// Cantidad de cajas existentes en el documento de recepción.-
+        /// Cantidad de cajas existentes en la confirmación.-
         /// </summary>
         private int cantidadDeCajas;
 
         /// <summary>
-        /// Cantidad de unidades existentes en el documento de recepción.-
+        /// Cantidad de unidades existentes en la confirmación.-
         /// </summary>
         private int cantidadDeUnidades;
 
@@ -101,12 +96,12 @@ namespace coca
         private List<Pallet> pallets;
 
         /// <summary>
-        /// Lista de Cajas del documento.-
+        /// Lista de Cajas de la confirmación.-
         /// </summary>
         private List<Caja> cajas;
 
         /// <summary>
-        /// Lista de Unidades del documento.-
+        /// Lista de Unidades de la confirmación.-
         /// </summary>
         private List<Unidad> unidades;
 
@@ -131,7 +126,7 @@ namespace coca
         private string cnpjTransporte;
 
         /// <summary>
-        /// Número de CNPJ del Declarante, según ANVISA.
+        /// Número de CNPJ del Declarante, según ANVISA.-
         /// </summary>
         private string cnpjDeclarante;
 
@@ -147,7 +142,7 @@ namespace coca
         /// <summary>
         /// Obtiene el número del documento.-
         /// </summary>
-        public int Numero
+        public long Numero
         {
             get { return numero; }
         }
@@ -260,14 +255,6 @@ namespace coca
         }
 
         /// <summary>
-        /// Obtiene el nombre del dispositivo desde el cual se procesó el documento.-
-        /// </summary>
-        public string PantallaDeProceso
-        {
-            get { return pantallaDeProceso; }
-        }
-
-        /// <summary>
         /// Obtiene la cantidad de pallets del documento.-
         /// </summary>
         public int CantidadDePallets
@@ -339,7 +326,7 @@ namespace coca
             get { return this.evtNotifId; }
         }
 
-        #endregion
+#endregion
 
         /// <summary>
         /// Nombre de la bitácora de datos comunes.-
@@ -349,7 +336,7 @@ namespace coca
         /// <summary>
         /// Nombre del objeto de negocios.-
         /// </summary>
-        private const string objetoDeNegocio = "Documento";
+        private const string objetoDeNegocio = "Confirmacion";
 
         /// <summary>
         /// 
@@ -361,11 +348,11 @@ namespace coca
         /// <exception cref="TipoDeDocumentoNoValidoException"></exception>
         /// <exception cref="DocumentoNoValidoException"></exception>
         /// <exception cref="DocumentoNoEncontradoException"></exception>
-        public Documento(string codigoAlmacenBuscado, string tipoDocumentoBuscado, int numeroDocumentoBuscado)
+        public Confirmacion(string codigoAlmacenBuscado, string tipoDocumentoBuscado, long numeroConfirmacionBuscada)
         {
             string iSQL = "";
             string mensaje = "";
-            DataTable documentoBuscado;
+            DataTable confirmacionBuscada;
             iSeriesConnection cn;
             List<string> parametrosDeConexion = new List<string>();
             Almacen almacen = null;
@@ -398,19 +385,18 @@ namespace coca
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
 
 
-            //Valida que el Número de Documento sea válido.-
-            if (numeroDocumentoBuscado == 0)
-                throw new Exception("El número de documento no es válido.");
+            //Valida que el Número de Confirmación sea válido.-
+            if (numeroConfirmacionBuscada == 0)
+                throw new Exception("El número de confirmación no es válido.");
 
-            iSQL = "SELECT * FROM BOSS06FLT.SER001A0 ";
+            iSQL = "SELECT * FROM BOSS06FLT.SER002A0 ";
             iSQL += "WHERE ALMACEN = '" + almacen.Codigo + "' AND ";
             iSQL += "TIPO_DOCUMENTO = '" + tipoDocumentoBuscado + "' AND ";
-            iSQL += "ID_DOCUMENTO = " + numeroDocumentoBuscado.ToString();
+            iSQL += "ID_DOCUMENTO = " + numeroConfirmacionBuscada.ToString();
 
             try
             {
@@ -426,13 +412,13 @@ namespace coca
             {
                 cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
                 cn.Open();
-                documentoBuscado = cn.ExecuteQuery(iSQL);
+                confirmacionBuscada = cn.ExecuteQuery(iSQL);
                 cn.Close();
             }
             catch (Exception ex)
             {
                 //Se anotan las excepciones de error en la bitácora.-
-                mensaje = "No se ha podido instanciar el documento con los datos recibidos. Mensajes posteriores pueden contener mayor información.-";
+                mensaje = "No se ha podido instanciar la confirmación con los datos recibidos. Mensajes posteriores pueden contener mayor información.-";
                 Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
                 Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
 
@@ -448,28 +434,30 @@ namespace coca
                 throw new Exception(ex.Message);
             }
 
-            if (documentoBuscado.Rows.Count != 0)
+            if (confirmacionBuscada.Rows.Count != 0)
             {
                 object ax;
-                DataTable palletsEncontrado;
 
-                // VARCHAR_FORMAT(timestamp_recepcion ,'yyyy-mm-dd')
-                this.numero = numeroDocumentoBuscado;
+                this.numero = numeroConfirmacionBuscada;
                 this.tipo = td;
                 this.almacen = almacen;
-                this.numeroDocumentoDeEntrada = documentoBuscado.Rows[0].Field<string>("NRO_DOC_RECEPCION").Trim();
-                this.numeroNotaFiscal = documentoBuscado.Rows[0].Field<string>("NOTA_FISCAL").Trim();
-                this.fechaHoraDeAlta = documentoBuscado.Rows[0].Field<DateTime>("TIMESTAMP_RECEPCION");
-                this.usuarioDeAlta = documentoBuscado.Rows[0].Field<string>("USUARIO_RECEPCION");
-                this.usuarioDeProceso = documentoBuscado.Rows[0].Field<string>("USUARIO_PROCESO");
-                this.fechaHoraDeProceso = documentoBuscado.Rows[0].Field<DateTime>("FECHA_PROCESO");
-                this.pantallaDeProceso = "*Ninguna";
-                this.evento = documentoBuscado.Rows[0].Field<string>("NRO_PROCESO");
-                this.nombreArchivoDeTransmision = documentoBuscado.Rows[0].Field<string>("ARCHIVO");
-                this.evtNotifId = documentoBuscado.Rows[0].Field<string>("ID_NOTIFICACIONES_EVENTOS");
+                this.numeroDocumentoDeEntrada = confirmacionBuscada.Rows[0].Field<string>("NRO_DOC_RECEPCION").Trim();
+                this.numeroNotaFiscal = confirmacionBuscada.Rows[0].Field<string>("NOTA_FISCAL").Trim();
+                this.evento = confirmacionBuscada.Rows[0].Field<string>("NRO_PROCESO");
+                this.fechaHoraDeAlta = confirmacionBuscada.Rows[0].Field<DateTime>("FECHA_ALTA");
+                this.usuarioDeAlta = confirmacionBuscada.Rows[0].Field<string>("USUARIO_ALTA");
+                this.nombreArchivoDeTransmision = confirmacionBuscada.Rows[0].Field<string>("ARCHIVO_PROCESO");
+                this.fechaHoraDeProceso = confirmacionBuscada.Rows[0].Field<DateTime>("FECHA_PROCESO");
+                this.usuarioDeProceso = confirmacionBuscada.Rows[0].Field<string>("USUARIO_PROCESO");
+                this.cantidadDePallets = confirmacionBuscada.Rows[0].Field<int>("CANTIDAD_PALLETS"); 
+                this.cantidadDeCajas = confirmacionBuscada.Rows[0].Field<int>("CANTIDAD_CAJAS");
+                this.cantidadDeUnidades = 0;
+                this.cnpjSOAP_Sender = confirmacionBuscada.Rows[0].Field<string>("PARTNER_FROM");
+                this.cnpjSOAP_Receiver = confirmacionBuscada.Rows[0].Field<string>("PARTNER_TO");
+                this.evtNotifId = confirmacionBuscada.Rows[0].Field<string>("ID_NOTIFICACIONES_EVENTOS");
 
                 EstadosDeDocumento estadoActual;
-                if (Enum.TryParse(documentoBuscado.Rows[0].Field<string>("ESTADO").ToString(), out estadoActual))
+                if (Enum.TryParse(confirmacionBuscada.Rows[0].Field<string>("ESTADO").ToString(), out estadoActual))
                 {
                     if (Enum.IsDefined(typeof(EstadosDeDocumento), estadoActual))
                     {
@@ -477,56 +465,36 @@ namespace coca
                     }
                     else
                     {
-                        mensaje = "No se puede determinar el estado del documento " + this.Numero.ToString();
+                        mensaje = "No se puede determinar el estado de la confirmación " + this.Numero.ToString();
                         Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
                         throw new DocumentoNoValidoException(mensaje);
                     }
                 }
 
-                this.cnpjSOAP_Sender = documentoBuscado.Rows[0].Field<string>("PARTNER_FROM");
-                this.cnpjSOAP_Receiver = documentoBuscado.Rows[0].Field<string>("PARTNER_TO");
-
                 try
                 {
                     cn.Open();
 
-                    iSQL = "SELECT * FROM BOSS06FLT.SER001F1 WHERE trim(TTIDDOC) = '" + numeroDocumentoBuscado.ToString() + "' FETCH FIRST ROW ONLY";
-                    documentoBuscado = cn.ExecuteQuery(iSQL);
-                    this.cnpjDeclarante = documentoBuscado.Rows[0].Field<object>("TTCNPJC").ToString();
-                    this.cnpjPartner = documentoBuscado.Rows[0].Field<object>("TTGS1").ToString();
-                    this.cnpjTransporte = documentoBuscado.Rows[0].Field<object>("TTCNPJT").ToString();
+                    iSQL = "SELECT * FROM BOSS06FLT.SER002F1 WHERE trim(CCIDDOC) = '" + numeroConfirmacionBuscada.ToString() + "' FETCH FIRST ROW ONLY";
+                    confirmacionBuscada = cn.ExecuteQuery(iSQL);
+                    this.cnpjDeclarante = confirmacionBuscada.Rows[0].Field<object>("CCCNPJC").ToString();
+                    this.cnpjPartner = confirmacionBuscada.Rows[0].Field<object>("CCGS1").ToString();
+                    this.cnpjTransporte = confirmacionBuscada.Rows[0].Field<object>("CCCNPJT").ToString();
 
-                    iSQL = "SELECT DISTINCT (ttpal) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + numeroDocumentoBuscado + " AND ttpal <> ''";
-                    palletsEncontrado = cn.ExecuteQuery(iSQL);
-                    this.cantidadDePallets = palletsEncontrado.Rows.Count;
-
-                    iSQL = "SELECT COUNT(ttcx) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + numeroDocumentoBuscado + " AND ttcx <> ''";
+                    iSQL = "SELECT count(*) FROM BOSS06FLT.SER002F2 WHERE trim(JJIDDOC) = '" + numeroConfirmacionBuscada.ToString() + "'";
                     ax = cn.ExecuteScalar(iSQL);
-                    if (ax is DBNull)
-                        this.cantidadDeCajas= 0;
-                    else
-                        this.cantidadDeCajas = System.Convert.ToInt32(ax);
-
-                    iSQL = "SELECT COUNT(*) FROM BOSS06FLT.SER001F2 WHERE GGIDDOC = " + numeroDocumentoBuscado;
-                    ax = cn.ExecuteScalar(iSQL);
-                    if (ax is DBNull)
-                        this.cantidadDeUnidades = 0;
-                    else
-                        this.cantidadDeUnidades = System.Convert.ToInt32(ax);
-
+                    this.cantidadDeUnidades = System.Convert.ToInt32(ax);
                     cn.Close();
-
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
                     
             }
             else
             {
-                mensaje = "No se ha encontrado un documento con los datos especificados (" + ")";
+                mensaje = "No se ha encontrado una confirmación con los datos especificados (" + ")";
                 Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Notificacion, objetoDeNegocio, 0, nombreBitacora);
                 throw new DocumentoNoEncontradoException(mensaje);
             }
@@ -538,12 +506,12 @@ namespace coca
         /// <param name="fechaDesde"></param>
         /// <param name="fechaHasta"></param>
         /// <returns></returns>
-        public static List<Documento> Obtener(DateTime fechaDesde, DateTime fechaHasta)
+        public static List<Confirmacion> Obtener(DateTime fechaDesde, DateTime fechaHasta)
         {
             string iSQL = "";
 
-            iSQL = "SELECT * FROM BOSS06FLT.SER001A0 ";
-            iSQL += "WHERE VARCHAR_FORMAT(timestamp_recepcion ,'yyyy-mm-dd') BETWEEN '";
+            iSQL = "SELECT * FROM BOSS06FLT.SER002A0 ";
+            iSQL += "WHERE FECHA_ALTA BETWEEN '";
             iSQL += fechaDesde.ToString("yyyy-MM-dd") + "' AND '" + fechaHasta.ToString("yyyy-MM-dd") + "' ORDER BY 1";
             return obtener(iSQL);
         }
@@ -555,16 +523,16 @@ namespace coca
         /// <param name="fechaHasta"></param>
         /// <param name="numeroLote"></param>
         /// <returns></returns>
-        public static List<Documento> Obtener(DateTime fechaDesde, DateTime fechaHasta, string numeroLote)
+        public static List<Confirmacion> Obtener(DateTime fechaDesde, DateTime fechaHasta, string numeroLote)
         {
             string iSQL = "";
 
-            iSQL = "SELECT ID, ARCHIVO, GGLOTE, ALMACEN, TIPO_DOCUMENTO, COUNT(*) FROM BOSS06FLT.SER001A0 ";
-            iSQL += "LEFT JOIN BOSS06FLT.SER001F2 ON ID = GGIDDOC ";
-            iSQL += "WHERE VARCHAR_FORMAT(timestamp_recepcion ,'yyyy-mm-dd') BETWEEN '";
-            iSQL += fechaDesde.ToString("yyyy-MM-dd") + "' AND '" + fechaHasta.ToString("yyyy-MM-dd") + "' ";
-            iSQL += "AND trim(GGLOTE) = '" + numeroLote + "' ";
-            iSQL += "GROUP BY ID, ARCHIVO, GGLOTE, ALMACEN, TIPO_DOCUMENTO ";
+            iSQL = "SELECT ID, JJLOTE, ALMACEN, TIPO_DOCUMENTO ";
+            iSQL += "FROM BOSS06FLT.SER002A0 ";
+            iSQL += "LEFT JOIN BOSS06FLT.SER002F2 ON ID = JJIDDOC ";
+            iSQL += "WHERE FECHA_ALTA BETWEEN '" + fechaDesde.ToString("yyyy-MM-dd") + "' AND '" + fechaHasta.ToString("yyyy-MM-dd") + "'";
+            iSQL += "AND trim(JJLOTE) = '" + numeroLote + "' ";
+            iSQL += "GROUP BY ID, JJLOTE, ALMACEN, TIPO_DOCUMENTO ";
             iSQL += "ORDER BY 1";
 
             return obtener(iSQL);
@@ -575,9 +543,9 @@ namespace coca
         /// </summary>
         /// <param name="iSQL"></param>
         /// <returns></returns>
-        private static List<Documento> obtener(string iSQL)
+        private static List<Confirmacion> obtener(string iSQL)
         {
-            List<Documento> listaParaDevolver = new List<Documento>();
+            List<Confirmacion> listaParaDevolver = new List<Confirmacion>();
             List<string> parametrosDeConexion = new List<string>();
             iSeriesConnection cn;
             DataTable registrosEncontrados = null;
@@ -624,11 +592,12 @@ namespace coca
                     {
                         try
                         {
-                            int a = fila.Field<int>("ID");
-                            Documento nuevoDocumento = new Documento(fila.Field<string>("ALMACEN"), fila.Field<string>("TIPO_DOCUMENTO"), fila.Field<int>("ID"));
-                            listaParaDevolver.Add(nuevoDocumento);
+                            decimal a25 = fila.Field<decimal>("ID");
+                            long a = System.Convert.ToInt32(a25);
+                            Confirmacion nuevaConfirmacion = new Confirmacion(fila.Field<string>("ALMACEN"), fila.Field<string>("TIPO_DOCUMENTO"), a);
+                            listaParaDevolver.Add(nuevaConfirmacion);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             //do nothing
                         }
@@ -664,7 +633,7 @@ namespace coca
 
             this.pallets = new List<Pallet>();
 
-            iSQL = "SELECT DISTINCT (ttpal) FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + this.Numero.ToString();
+            iSQL = "SELECT DISTINCT (ccpal), cciddoc FROM BOSS06FLT.SER002F1 WHERE CCIDDOC = " + this.Numero.ToString();
 
             try
             {
@@ -686,7 +655,7 @@ namespace coca
             catch (Exception ex)
             {
                 //Se anotan las excepciones de error en la bitácora.-
-                mensaje = "No se ha podido instanciar el documento con los datos recibidos. Mensajes posteriores pueden contener mayor información.-";
+                mensaje = "No se han podido obtener los pallets de la confirmación. Mensajes posteriores pueden contener mayor información.-";
                 Bitacora.AgregarEntrada(mensaje, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
                 Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
 
@@ -704,7 +673,7 @@ namespace coca
 
             foreach (DataRow fila in palletsEncontrados.Rows)
             {
-                this.pallets.Add(new Pallet(fila.Field<string>("TTPAL"), this.Numero, false));
+                this.pallets.Add(new Pallet(fila.Field<string>("CCPAL"), this.Numero, false));
             }
         }
 
@@ -727,7 +696,7 @@ namespace coca
             iSeriesConnection cn;
             DataTable registrosEncontrados = null;
 
-            string iSQL = "SELECT DISTINCT(GGLOTE) FROM BOSS06FLT.SER001F2 WHERE GGIDDOC = " + this.Numero.ToString();
+            string iSQL = "SELECT DISTINCT(JJLOTE) FROM BOSS06FLT.SER002F2 WHERE JJIDDOC = " + this.Numero.ToString();
 
             try
             {
@@ -748,7 +717,7 @@ namespace coca
             }
             catch (Exception ex)
             {
-                Bitacora.AgregarEntrada("Han aparecido errores al intentar obtener los lotes del archivo documento actual. Puede haber excepciones internas con mayor detalle.-", TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                Bitacora.AgregarEntrada("Han aparecido errores al intentar obtener los lotes de la confirmación actual. Puede haber excepciones internas con mayor detalle.-", TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
                 Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
 
                 Exception excepcionActual = ex;
@@ -762,11 +731,12 @@ namespace coca
             if (registrosEncontrados != null)
             {
                 foreach (DataRow fila in registrosEncontrados.Rows)
-                    listaParaDevolver.Add(fila.Field<string>("GGLOTE"));
+                    listaParaDevolver.Add(fila.Field<string>("JJLOTE"));
             }
 
             return listaParaDevolver;
         }
+
 
         /// <summary>
         /// 
@@ -779,7 +749,7 @@ namespace coca
             iSeriesConnection cn;
             DataTable registrosEncontrados = null;
 
-            string iSQL = "SELECT DISTINCT(GGSKU) FROM BOSS06FLT.SER001F2 WHERE GGIDDOC = " + this.Numero.ToString();
+            string iSQL = "SELECT DISTINCT(JJSKU) FROM BOSS06FLT.SER002F2 WHERE JJIDDOC = " + this.Numero.ToString();
 
             try
             {
@@ -814,7 +784,7 @@ namespace coca
             if (registrosEncontrados != null)
             {
                 foreach (DataRow fila in registrosEncontrados.Rows)
-                    listaParaDevolver.Add(fila.Field<string>("GGSKU"));
+                    listaParaDevolver.Add(fila.Field<string>("JJSKU"));
             }
 
             return listaParaDevolver;
@@ -833,7 +803,7 @@ namespace coca
             iSeriesConnection cn;
             DataTable registrosEncontrados = null;
 
-            string iSQL = "SELECT ttcx FROM BOSS06FLT.SER001F1 WHERE TTIDDOC = " + this.Numero.ToString() + " AND TTPAL = '" + ssccPallet.Trim() + "'";
+            string iSQL = "SELECT cccx FROM BOSS06FLT.SER002F1 WHERE CCIDDOC = " + this.Numero.ToString() + " AND CCPAL = '" + ssccPallet.Trim() + "'";
 
             try
             {
@@ -868,16 +838,12 @@ namespace coca
             if (registrosEncontrados != null)
             {
                 foreach (DataRow fila in registrosEncontrados.Rows)
-                    listaParaDevolver.Add(fila.Field<string>("ttcx"));
+                    listaParaDevolver.Add(fila.Field<string>("cccx"));
             }
 
             return listaParaDevolver;
 
         }
     }
-
-
-
-
 }
 

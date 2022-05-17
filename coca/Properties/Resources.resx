@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_ibm_ix_logo_global" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\-ibm-ix-logo-global.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pallet2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\pallet2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,8 +139,14 @@
   <data name="Actions-dialog-ok-apply-icon48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\Actions-dialog-ok-apply-icon48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="no_trz" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\imagenes\no_trz.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="barcode-reader-icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\barcode-reader-icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cajas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\cajas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ibm-logo3d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\ibm-logo3d.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Actions-edit-delete-icon48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\Actions-edit-delete-icon48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,11 +154,17 @@
   <data name="ibm_i" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\ibm_i.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="49590_boxes_customers_inventory_products_icon_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\49590_boxes_customers_inventory_products_icon_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Coca-Cola-Can-icon_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\Coca-Cola-Can-icon_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ibm_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\ibm_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Actions-view-refresh-icon48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\Actions-view-refresh-icon48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,11 +172,11 @@
   <data name="database-up-icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\database-up-icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="no_trz" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\no_trz.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="database-down-icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\database-down-icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="under_construction" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\imagenes\under_construction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pallet1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\pallet1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,16 +184,22 @@
   <data name="sad-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\sad-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="barcode-reader-icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\imagenes\barcode-reader-icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="unidades" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\imagenes\unidades.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cajas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\imagenes\cajas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LOGIBM_idgtv" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\LOGIBM_idgtv.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="49590_boxes_customers_inventory_products_icon_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\imagenes\49590_boxes_customers_inventory_products_icon_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="under_construction" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\under_construction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="calf-icon_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\calf-icon_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="calf-icon_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\calf-icon_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ibm_power5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\imagenes\ibm-power5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -20,9 +20,12 @@ namespace coca
         /// </summary>
         List<String> parametrosDeConexion;
 
+        Sistema sistemaActual;
+        List<Sistema> sistemasConfigurados;
+
+        bool cargaEnProceso;
         string rutaDatos;
         string archivoCredenciales = "ibmi.series";
-        string archivoSistemas = "sistemas.dat";
         DialogResult respuesta;
 
         public DialogResult Mostrar()
@@ -41,11 +44,13 @@ namespace coca
             Cursor = Cursors.WaitCursor;
             try
             {
-                iSeriesConnection cnn = new iSeriesConnection(cmbSistemas.Text, txtUsuario.Text, txtPassword.Text);
+                //iSeriesConnection cnn = new iSeriesConnection(cmbSistemas.Text, txtUsuario.Text, txtPassword.Text);
+                iSeriesConnection cnn = new iSeriesConnection(sistemaActual.DireccionIP, txtUsuario.Text, txtPassword.Text);
                 parametrosDeConexion = new List<String>();
                 parametrosDeConexion.Add(txtUsuario.Text);
                 parametrosDeConexion.Add(txtPassword.Text);
                 parametrosDeConexion.Add(cmbSistemas.Text);
+                parametrosDeConexion.Add(sistemaActual.DireccionIP);
                 guardarCredenciales();
                 respuesta = DialogResult.OK;
                 this.Close();
@@ -72,10 +77,17 @@ namespace coca
             this.Close();
         }
 
+        private void cmbSistemas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!cargaEnProceso)
+                sistemaActual = sistemasConfigurados.Find(x => x.Descripcion == cmbSistemas.Text);
+        }
+
         private void frmLogin_iSeries_Load(object sender, EventArgs e)
         {
             Assembly myAssembly = Assembly.GetExecutingAssembly();
             rutaDatos = Path.GetDirectoryName(myAssembly.Location);
+            cargaEnProceso = false;
 
             cargarSistemasDisponibles();
         }
@@ -85,14 +97,22 @@ namespace coca
         /// </summary>
         private void cargarSistemasDisponibles()
         {
-            using (StreamReader fr = new StreamReader(rutaDatos + Path.DirectorySeparatorChar + archivoSistemas))
-            {
-                string renglon;
-                while ((renglon = fr.ReadLine()) != null)
-                    cmbSistemas.Items.Add(renglon);
+            cargaEnProceso = true;
+            sistemasConfigurados = Sistema.Obtener();
 
-                cmbSistemas.SelectedIndex = 0;
-            }
+            foreach (Sistema s in sistemasConfigurados)
+                cmbSistemas.Items.Add(s.Descripcion);
+
+            cmbSistemas.SelectedIndex = 0;
+
+            //using (StreamReader fr = new StreamReader(rutaDatos + Path.DirectorySeparatorChar + archivoSistemas))
+            //{
+            //    string renglon;
+            //    while ((renglon = fr.ReadLine()) != null)
+            //        cmbSistemas.Items.Add(renglon);
+            //}
+
+            cargaEnProceso = false;
         }
 
         /// <summary>
@@ -103,7 +123,7 @@ namespace coca
             string renglon;
 
             StreamWriter sw = new StreamWriter(rutaDatos + Path.DirectorySeparatorChar + archivoCredenciales, false);
-            renglon = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(cmbSistemas.Text));
+            renglon = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(sistemaActual.DireccionIP));
             sw.WriteLine(renglon);
             renglon = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(txtUsuario.Text));
             sw.WriteLine(renglon);

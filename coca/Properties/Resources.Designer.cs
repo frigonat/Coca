@@ -73,6 +73,16 @@ namespace coca.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _ibm_ix_logo_global {
+            get {
+                object obj = ResourceManager.GetObject("_ibm_ix_logo_global", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Actions_dialog_ok_apply_icon48 {
             get {
                 object obj = ResourceManager.GetObject("Actions-dialog-ok-apply-icon48", resourceCulture);
@@ -116,6 +126,26 @@ namespace coca.Properties {
         internal static System.Drawing.Bitmap cajas {
             get {
                 object obj = ResourceManager.GetObject("cajas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap calf_icon_128 {
+            get {
+                object obj = ResourceManager.GetObject("calf-icon_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap calf_icon_48 {
+            get {
+                object obj = ResourceManager.GetObject("calf-icon_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +216,46 @@ namespace coca.Properties {
         internal static System.Drawing.Bitmap ibm_i {
             get {
                 object obj = ResourceManager.GetObject("ibm_i", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ibm_logo {
+            get {
+                object obj = ResourceManager.GetObject("ibm_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ibm_logo3d {
+            get {
+                object obj = ResourceManager.GetObject("ibm-logo3d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ibm_power5 {
+            get {
+                object obj = ResourceManager.GetObject("ibm_power5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LOGIBM_idgtv {
+            get {
+                object obj = ResourceManager.GetObject("LOGIBM_idgtv", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

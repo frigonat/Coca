@@ -59,6 +59,11 @@
             this.trvContenido = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.fraSobreSOAP = new System.Windows.Forms.GroupBox();
+            this.lblPartnerOrigen = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lblPartnerDestino = new System.Windows.Forms.Label();
             this.lblPartner = new System.Windows.Forms.Label();
             this.lblDeclarante = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -74,10 +79,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblEstado = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.lblPartnerDestino = new System.Windows.Forms.Label();
-            this.lblPartnerOrigen = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.lblNroDocumentoRecepcion = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.lblNotaFiscal = new System.Windows.Forms.Label();
@@ -91,9 +92,12 @@
             this.lblAlmacen = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblEvtNotifId = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.fraConfirmacion = new System.Windows.Forms.GroupBox();
+            this.pctBecerro = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pctEmoji = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.lblUsuarioDeProceso = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -117,6 +121,7 @@
             this.btnRecuperarContenido = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -124,14 +129,16 @@
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.fraSobreSOAP.SuspendLayout();
             this.fraContenido.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.fraConfirmacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctBecerro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctEmoji)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.fraProductos.SuspendLayout();
             this.fraLotes.SuspendLayout();
@@ -282,6 +289,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -292,6 +300,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.fraSobreSOAP);
             this.tabPage1.Controls.Add(this.lblPartner);
             this.tabPage1.Controls.Add(this.lblDeclarante);
             this.tabPage1.Controls.Add(this.label19);
@@ -301,10 +310,6 @@
             this.tabPage1.Controls.Add(this.fraContenido);
             this.tabPage1.Controls.Add(this.lblEstado);
             this.tabPage1.Controls.Add(this.label23);
-            this.tabPage1.Controls.Add(this.lblPartnerDestino);
-            this.tabPage1.Controls.Add(this.lblPartnerOrigen);
-            this.tabPage1.Controls.Add(this.label17);
-            this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.lblNroDocumentoRecepcion);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.lblNotaFiscal);
@@ -324,6 +329,61 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Cabecera";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // fraSobreSOAP
+            // 
+            this.fraSobreSOAP.Controls.Add(this.lblPartnerOrigen);
+            this.fraSobreSOAP.Controls.Add(this.label16);
+            this.fraSobreSOAP.Controls.Add(this.label17);
+            this.fraSobreSOAP.Controls.Add(this.lblPartnerDestino);
+            this.fraSobreSOAP.Location = new System.Drawing.Point(10, 361);
+            this.fraSobreSOAP.Name = "fraSobreSOAP";
+            this.fraSobreSOAP.Size = new System.Drawing.Size(405, 113);
+            this.fraSobreSOAP.TabIndex = 26;
+            this.fraSobreSOAP.TabStop = false;
+            this.fraSobreSOAP.Text = "Sobre SOAP";
+            // 
+            // lblPartnerOrigen
+            // 
+            this.lblPartnerOrigen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPartnerOrigen.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPartnerOrigen.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblPartnerOrigen.Location = new System.Drawing.Point(100, 26);
+            this.lblPartnerOrigen.Name = "lblPartnerOrigen";
+            this.lblPartnerOrigen.Size = new System.Drawing.Size(285, 23);
+            this.lblPartnerOrigen.TabIndex = 15;
+            this.lblPartnerOrigen.Text = "label18";
+            this.lblPartnerOrigen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(8, 31);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(82, 13);
+            this.label16.TabIndex = 13;
+            this.label16.Text = "Partner Origen:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(8, 77);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(86, 13);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "Partner Destino:";
+            // 
+            // lblPartnerDestino
+            // 
+            this.lblPartnerDestino.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPartnerDestino.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPartnerDestino.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblPartnerDestino.Location = new System.Drawing.Point(100, 72);
+            this.lblPartnerDestino.Name = "lblPartnerDestino";
+            this.lblPartnerDestino.Size = new System.Drawing.Size(285, 23);
+            this.lblPartnerDestino.TabIndex = 16;
+            this.lblPartnerDestino.Text = "label19";
+            this.lblPartnerDestino.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblPartner
             // 
@@ -471,7 +531,7 @@
             this.lblEstado.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblEstado.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstado.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblEstado.Location = new System.Drawing.Point(68, 462);
+            this.lblEstado.Location = new System.Drawing.Point(68, 509);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(285, 23);
             this.lblEstado.TabIndex = 18;
@@ -481,53 +541,11 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(15, 467);
+            this.label23.Location = new System.Drawing.Point(15, 514);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(44, 13);
             this.label23.TabIndex = 17;
             this.label23.Text = "Estado:";
-            // 
-            // lblPartnerDestino
-            // 
-            this.lblPartnerDestino.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblPartnerDestino.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPartnerDestino.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblPartnerDestino.Location = new System.Drawing.Point(110, 414);
-            this.lblPartnerDestino.Name = "lblPartnerDestino";
-            this.lblPartnerDestino.Size = new System.Drawing.Size(285, 23);
-            this.lblPartnerDestino.TabIndex = 16;
-            this.lblPartnerDestino.Text = "label19";
-            this.lblPartnerDestino.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblPartnerOrigen
-            // 
-            this.lblPartnerOrigen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblPartnerOrigen.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPartnerOrigen.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblPartnerOrigen.Location = new System.Drawing.Point(110, 368);
-            this.lblPartnerOrigen.Name = "lblPartnerOrigen";
-            this.lblPartnerOrigen.Size = new System.Drawing.Size(285, 23);
-            this.lblPartnerOrigen.TabIndex = 15;
-            this.lblPartnerOrigen.Text = "label18";
-            this.lblPartnerOrigen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(18, 419);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(86, 13);
-            this.label17.TabIndex = 14;
-            this.label17.Text = "Partner Destino:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(18, 373);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(82, 13);
-            this.label16.TabIndex = 13;
-            this.label16.Text = "Partner Origen:";
             // 
             // lblNroDocumentoRecepcion
             // 
@@ -576,7 +594,7 @@
             this.lblNroDocumento.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblNroDocumento.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNroDocumento.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblNroDocumento.Location = new System.Drawing.Point(141, 118);
+            this.lblNroDocumento.Location = new System.Drawing.Point(125, 118);
             this.lblNroDocumento.Name = "lblNroDocumento";
             this.lblNroDocumento.Size = new System.Drawing.Size(71, 23);
             this.lblNroDocumento.TabIndex = 8;
@@ -588,9 +606,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(15, 123);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(118, 13);
+            this.label10.Size = new System.Drawing.Size(104, 13);
             this.label10.TabIndex = 7;
-            this.label10.Text = "Nro. de Documento ID:";
+            this.label10.Text = "Nro. de Documento:";
             // 
             // lblTipoDeDocumento
             // 
@@ -657,6 +675,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.lblEvtNotifId);
+            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.fraConfirmacion);
             this.tabPage2.Controls.Add(this.lblUsuarioDeProceso);
             this.tabPage2.Controls.Add(this.label2);
@@ -674,10 +694,33 @@
             this.tabPage2.Text = "Auditoría";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // lblEvtNotifId
+            // 
+            this.lblEvtNotifId.BackColor = System.Drawing.Color.Black;
+            this.lblEvtNotifId.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblEvtNotifId.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEvtNotifId.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblEvtNotifId.Location = new System.Drawing.Point(96, 148);
+            this.lblEvtNotifId.Name = "lblEvtNotifId";
+            this.lblEvtNotifId.Size = new System.Drawing.Size(214, 23);
+            this.lblEvtNotifId.TabIndex = 19;
+            this.lblEvtNotifId.Text = "label22";
+            this.lblEvtNotifId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(18, 153);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(72, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "<evtNotifId>";
+            // 
             // fraConfirmacion
             // 
+            this.fraConfirmacion.Controls.Add(this.pctBecerro);
             this.fraConfirmacion.Controls.Add(this.pictureBox6);
-            this.fraConfirmacion.Controls.Add(this.pictureBox5);
+            this.fraConfirmacion.Controls.Add(this.pctEmoji);
             this.fraConfirmacion.Controls.Add(this.label11);
             this.fraConfirmacion.Location = new System.Drawing.Point(21, 336);
             this.fraConfirmacion.Name = "fraConfirmacion";
@@ -686,24 +729,33 @@
             this.fraConfirmacion.TabStop = false;
             this.fraConfirmacion.Text = "Confirmación:";
             // 
+            // pctBecerro
+            // 
+            this.pctBecerro.Image = global::coca.Properties.Resources.calf_icon_48;
+            this.pctBecerro.Location = new System.Drawing.Point(454, 138);
+            this.pctBecerro.Name = "pctBecerro";
+            this.pctBecerro.Size = new System.Drawing.Size(59, 49);
+            this.pctBecerro.TabIndex = 19;
+            this.pctBecerro.TabStop = false;
+            // 
             // pictureBox6
             // 
             this.pictureBox6.Image = global::coca.Properties.Resources.database_remove_icon128;
             this.pictureBox6.Location = new System.Drawing.Point(15, 36);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(145, 141);
+            this.pictureBox6.Size = new System.Drawing.Size(122, 141);
             this.pictureBox6.TabIndex = 18;
             this.pictureBox6.TabStop = false;
             // 
-            // pictureBox5
+            // pctEmoji
             // 
-            this.pictureBox5.Image = global::coca.Properties.Resources.sad_icon;
-            this.pictureBox5.Location = new System.Drawing.Point(454, 138);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(59, 49);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 17;
-            this.pictureBox5.TabStop = false;
+            this.pctEmoji.Image = global::coca.Properties.Resources.sad_icon;
+            this.pctEmoji.Location = new System.Drawing.Point(454, 138);
+            this.pctEmoji.Name = "pctEmoji";
+            this.pctEmoji.Size = new System.Drawing.Size(59, 49);
+            this.pctEmoji.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pctEmoji.TabIndex = 17;
+            this.pctEmoji.TabStop = false;
             // 
             // label11
             // 
@@ -722,7 +774,7 @@
             this.lblUsuarioDeProceso.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblUsuarioDeProceso.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUsuarioDeProceso.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblUsuarioDeProceso.Location = new System.Drawing.Point(127, 217);
+            this.lblUsuarioDeProceso.Location = new System.Drawing.Point(127, 268);
             this.lblUsuarioDeProceso.Name = "lblUsuarioDeProceso";
             this.lblUsuarioDeProceso.Size = new System.Drawing.Size(214, 23);
             this.lblUsuarioDeProceso.TabIndex = 14;
@@ -732,7 +784,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 222);
+            this.label2.Location = new System.Drawing.Point(18, 273);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 13;
@@ -744,7 +796,7 @@
             this.lblFechaHoraProceso.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblFechaHoraProceso.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaHoraProceso.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblFechaHoraProceso.Location = new System.Drawing.Point(153, 154);
+            this.lblFechaHoraProceso.Location = new System.Drawing.Point(153, 205);
             this.lblFechaHoraProceso.Name = "lblFechaHoraProceso";
             this.lblFechaHoraProceso.Size = new System.Drawing.Size(214, 23);
             this.lblFechaHoraProceso.TabIndex = 12;
@@ -754,7 +806,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(18, 159);
+            this.label21.Location = new System.Drawing.Point(18, 210);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(129, 13);
             this.label21.TabIndex = 11;
@@ -815,7 +867,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(576, 579);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Contenido";
+            this.tabPage3.Text = "Lotes & Productos";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // fraProductos
@@ -953,6 +1005,16 @@
             this.pictureBox4.TabIndex = 0;
             this.pictureBox4.TabStop = false;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(576, 579);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Contenido";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // frmDocumentoRecepcion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -975,6 +1037,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.fraSobreSOAP.ResumeLayout(false);
+            this.fraSobreSOAP.PerformLayout();
             this.fraContenido.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -982,8 +1046,9 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.fraConfirmacion.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pctBecerro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctEmoji)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.fraProductos.ResumeLayout(false);
             this.fraLotes.ResumeLayout(false);
@@ -1066,7 +1131,12 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox fraConfirmacion;
         private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pctEmoji;
         private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pctBecerro;
+        private System.Windows.Forms.GroupBox fraSobreSOAP;
+        private System.Windows.Forms.Label lblEvtNotifId;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabPage5;
     }
 }

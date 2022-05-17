@@ -184,7 +184,6 @@
             // 
             // cmbTiposDeDocumento
             // 
-            this.cmbTiposDeDocumento.Enabled = false;
             this.cmbTiposDeDocumento.FormattingEnabled = true;
             this.cmbTiposDeDocumento.Location = new System.Drawing.Point(422, 53);
             this.cmbTiposDeDocumento.Name = "cmbTiposDeDocumento";
@@ -256,7 +255,6 @@
             // 
             // cmbClientes
             // 
-            this.cmbClientes.Enabled = false;
             this.cmbClientes.FormattingEnabled = true;
             this.cmbClientes.Location = new System.Drawing.Point(363, 24);
             this.cmbClientes.Name = "cmbClientes";

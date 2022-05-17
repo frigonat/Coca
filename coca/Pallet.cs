@@ -18,7 +18,7 @@ namespace coca
         /// <summary>
         /// Número de documento al que pertence el pallet.-
         /// </summary>
-        int numeroDocumento;
+        private long numeroDocumento;
 
         /// <summary>
         /// Código SSCC del pallet.-
@@ -42,7 +42,7 @@ namespace coca
         /// <summary>
         /// Obtiene el número de documento al que pertence el pallet.-
         /// </summary>
-        public int NumeroDocumento
+        public long NumeroDocumento
         {
             get { return this.numeroDocumento; }
         }
@@ -77,10 +77,11 @@ namespace coca
         private const string objetoDeNegocio = "Pallet";
 
         /// <summary>
-        /// Crea un nuevo 
+        /// Crea un nuevo pallet con el número SSCC recibido y número de documento recibido. Las cajas del mismo (si las hubise) se instancian automáticamente.-
         /// </summary>
-        /// <param name="nuevoSSCC"></param>
-        public Pallet(string nuevoSSCC, int nuevoNumeroDeDocumento)
+        /// <param name="nuevoSSCC">Número de etiqueta SSCC para el pallet.-</param>
+        /// <param name="nuevoNumeroDeDocumento">Número de documento al que pertenece el pallet.-</param>
+        public Pallet(string nuevoSSCC, long nuevoNumeroDeDocumento)
         {
             this.numeroDocumento = nuevoNumeroDeDocumento;
             this.codigoSSCC = nuevoSSCC;
@@ -88,15 +89,17 @@ namespace coca
         }
 
         /// <summary>
-        /// Crea un nuevo 
+        /// Crea un nuevo pallet con el número SSCC recibido y número de documento recibido. Las cajas del mismo se instancian según se indique en el parámetro correspondiente.-
         /// </summary>
-        /// <param name="nuevoSSCC"></param>
-        public Pallet(string nuevoSSCC, int nuevoNumeroDeDocumento, bool recuperarCaja)
+        /// <param name="nuevoSSCC">Número de etiqueta SSCC para el pallet.-</param>
+        /// <param name="nuevoNumeroDeDocumento">Número de documento al que pertenece el pallet.-</param>
+        /// <param name="recuperarCajas">Indica si las cajas del pallet deben recuperarse o no.-</param>
+        public Pallet(string nuevoSSCC, long nuevoNumeroDeDocumento, bool recuperarCajas)
         {
             this.numeroDocumento = nuevoNumeroDeDocumento;
             this.codigoSSCC = nuevoSSCC;
 
-            if (recuperarCaja)
+            if (recuperarCajas)
                 RecuperarCajas();
         }
 
@@ -114,7 +117,7 @@ namespace coca
             iSeriesConnection cn;
             this.cajas = new List<Caja>();
 
-            iSQL = "SELECT DISTINCT(ttcx) FROM BOSS06FLT.SER001F1 WHERE trim(ttpal) = '" + this.CodigoSSCC + "'";
+            iSQL = "SELECT DISTINCT(cccx) FROM BOSS06FLT.SER002F1 WHERE trim(ccpal) = '" + this.CodigoSSCC + "'";
             try
             {
                 cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
@@ -143,7 +146,7 @@ namespace coca
             
 
             foreach (DataRow fila in cajasEncontradas.Rows)
-                this.cajas.Add(new Caja(fila.Field<string>("ttcx"), this.NumeroDocumento));
+                this.cajas.Add(new Caja(fila.Field<string>("cccx"), this.NumeroDocumento));
 
             this.cantidadCajas = cajasEncontradas.Rows.Count;
         }

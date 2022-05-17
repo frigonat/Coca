@@ -27,21 +27,25 @@ namespace coca
             tiposDeDocumento = new Dictionary<string, string>();
             tiposDeDocumento = TipoDeDocumento.Obtener();
 
-            cmbTiposDeDocumento.Items.Add("*Todos");
-            cmbClientes.Items.Add("*Todos");
-
-            foreach (KeyValuePair<string, string> kvp in tiposDeDocumento)
-                cmbTiposDeDocumento.Items.Add(kvp.Key);
-
-            cmbClientes.SelectedIndex = 0;
-            cmbTiposDeDocumento.SelectedIndex = 0;
-
             lblTotalPallets.Text = "0";
             lblTotalCajas.Text = "0";
             lblTotalUnidades.Text = "0";
 
             dtpFechaDesde.Value = DateTime.Now.AddDays(-1);
             dtpFechaHasta.Value = DateTime.Now;
+
+
+            cmbTiposDeDocumento.Items.Add("*Todos");
+            foreach (KeyValuePair<string, string> kvp in tiposDeDocumento)
+                cmbTiposDeDocumento.Items.Add(kvp.Key);
+
+            cmbTiposDeDocumento.SelectedIndex = 0;
+
+            cmbClientes.Items.Add("*Todos");
+            List<Almacen> almacenes = Almacen.Obtener();
+            foreach (Almacen a in almacenes)
+                cmbClientes.Items.Add(a.Nombre);
+            cmbClientes.SelectedIndex = 0;
         }
 
         private void btnRefrescar_Click(object sender, EventArgs e)
@@ -58,6 +62,14 @@ namespace coca
                 documentos = Documento.Obtener(dtpFechaDesde.Value, dtpFechaHasta.Value, txtNumeroDeLote.Text);
             else
                 documentos = Documento.Obtener(dtpFechaDesde.Value, dtpFechaHasta.Value);
+
+            //Si se especificó el filtro x Tipo de Documento, se aplica.-
+            if (cmbTiposDeDocumento.Text != "*Todos")
+                documentos.RemoveAll(item => item.Tipo.Descripcion.ToString() != cmbTiposDeDocumento.Text);
+
+            //Si se especificó el filtro x Cliente, se aplica.-
+            if (cmbClientes.Text != "*Todos")
+                documentos.RemoveAll(item => item.NombreDeAlmacen != cmbClientes.Text);
 
             dgvRecepciones.Rows.Clear();
             object[] valores = new object[13];

@@ -141,6 +141,51 @@ namespace coca
 
     #endregion
 
+    #region TIPOS_DE_DOCUMENTO
+
+    /// <summary>
+    /// Excepción que se produce cuando no se puede encontrar un tipo de documento buscado.-
+    /// </summary>
+    public class TipoDeDocumentoNoEncontradoException : Exception
+    {
+        public TipoDeDocumentoNoEncontradoException()
+            : base("No se ha podido encontrar el tipo de documento buscado.-")
+        {
+        }
+
+        public TipoDeDocumentoNoEncontradoException(string mensaje)
+            : base(mensaje)
+        {
+        }
+
+        public TipoDeDocumentoNoEncontradoException(string mensaje, Exception interna)
+            : base(mensaje, interna)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Excepción que se produce cuando se detecta un tipo de documento con datos inválidos.-
+    /// </summary>
+    public class TipoDeDocumentoNoValidoException : Exception
+    {
+        public TipoDeDocumentoNoValidoException()
+            : base("El tipo de documento tiene datos inválidos.-")
+        {
+        }
+
+        public TipoDeDocumentoNoValidoException(string mensaje)
+            : base(mensaje)
+        {
+        }
+
+        public TipoDeDocumentoNoValidoException(string mensaje, Exception interna)
+            : base(mensaje, interna)
+        {
+        }
+    }
+    #endregion
+
     #region AUDITORIAS
 
     /// <summary>
@@ -201,6 +246,136 @@ namespace coca
         }
 
         public AuditoriaNoValidaException(string mensaje, Exception interna)
+            : base(mensaje, interna)
+        {
+        }
+    }
+
+    #endregion
+
+    #region SISTEMAS
+    /// <summary>
+    /// Excepción que se produce cuando no se puede encontrar un sistema.-
+    /// </summary>
+    public class SistemaNoEncontradoException : Exception
+    {
+        public SistemaNoEncontradoException()
+            : base("No se ha podido encontrar el sistema.-")
+        {
+        }
+
+        public SistemaNoEncontradoException(string mensaje)
+            : base(mensaje)
+        {
+        }
+
+        public SistemaNoEncontradoException(string mensaje, Exception interna)
+            : base(mensaje, interna)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Excepción que se produce cuando no se puede crear un sistema.-
+    /// </summary>
+    public class SistemaNoCreadoException : Exception
+    {
+        public SistemaNoCreadoException()
+            : base("No se ha podido crear el sistema.-")
+        {
+        }
+
+        public SistemaNoCreadoException(string mensaje)
+            : base(mensaje)
+        {
+        }
+
+        public SistemaNoCreadoException(string mensaje, Exception interna)
+            : base(mensaje, interna)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Excepción que se produce cuando se encuentra un sistema con datos no válidos.-
+    /// </summary>
+    public class SistemaNoValidoException : Exception
+    {
+        public SistemaNoValidoException()
+            : base("El sistema recuperado contiene datos no válidos.-")
+        {
+        }
+
+        public SistemaNoValidoException(string mensaje)
+            : base(mensaje)
+        {
+        }
+
+        public SistemaNoValidoException(string mensaje, Exception interna)
+            : base(mensaje, interna)
+        {
+        }
+    }
+
+
+    /// <summary>
+    /// Excepción que se produce cuando no se puede cambiar un sistema.-
+    /// </summary>
+    public class SistemaNoCambiadoException : Exception
+    {
+        public SistemaNoCambiadoException()
+            : base("No se ha podido cambiar el sistema.-")
+        {
+        }
+
+        public SistemaNoCambiadoException(string mensaje)
+            : base(mensaje)
+        {
+        }
+
+        public SistemaNoCambiadoException(string mensaje, Exception interna)
+            : base(mensaje, interna)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Excepción que se produce cuando no se puede deshabilitar un sistema.-
+    /// </summary>
+    public class SistemaNoDeshabilitadoException : Exception
+    {
+        public SistemaNoDeshabilitadoException()
+            : base("No se ha podido deshabilitar el sistema.-")
+        {
+        }
+
+        public SistemaNoDeshabilitadoException(string mensaje)
+            : base(mensaje)
+        {
+        }
+
+        public SistemaNoDeshabilitadoException(string mensaje, Exception interna)
+            : base(mensaje, interna)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Excepción que se produce cuando no se puede habilitar un sistema.-
+    /// </summary>
+    public class SistemaNoHabilitadoException : Exception
+    {
+        public SistemaNoHabilitadoException()
+            : base("No se ha podido habilitar el sistema.-")
+        {
+        }
+
+        public SistemaNoHabilitadoException(string mensaje)
+            : base(mensaje)
+        {
+        }
+
+        public SistemaNoHabilitadoException(string mensaje, Exception interna)
             : base(mensaje, interna)
         {
         }
@@ -730,386 +905,6 @@ namespace coca
 
     #endregion
 
-    #region EXCEPCIONES_AlícuotasIVA
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede encontrar una alícuota de IVA buscada.-
-    /// </summary>
-    public class AlicuotaDeIVANoEncontradaException : Exception
-    {
-        public AlicuotaDeIVANoEncontradaException()
-            : base("No se ha podido encontrar la alícuota buscada.-")
-        {
-        }
-
-        public AlicuotaDeIVANoEncontradaException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public AlicuotaDeIVANoEncontradaException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando se detecta una alícuota de IVA con datos inválidos.-
-    /// </summary>
-    public class AlicuotaDeIVANoValidaException : Exception
-    {
-        public AlicuotaDeIVANoValidaException()
-            : base("La alícuota tiene datos inválidos.-")
-        {
-        }
-
-        public AlicuotaDeIVANoValidaException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public AlicuotaDeIVANoValidaException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    #endregion
-
-    #region EXCEPCIONES_Direcciones
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede encontrar un domicilio buscado.-
-    /// </summary>
-    public class DomicilioNoEncontradoException: Exception
-    {
-        public DomicilioNoEncontradoException()
-            : base("No se ha podido encontrar el domicilio buscado.-")
-        {
-        }
-
-        public DomicilioNoEncontradoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public DomicilioNoEncontradoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando se detecta un domicilio con datos inválidos.-
-    /// </summary>
-    public class DomicilioNoValidoException: Exception
-    {
-        public DomicilioNoValidoException()
-            : base("El domicilio tiene datos inválidos.-")
-        {
-        }
-
-        public DomicilioNoValidoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public DomicilioNoValidoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede crear un domicilio.-
-    /// </summary>
-    public class DomicilioNoCreadoException: Exception
-    {
-        public DomicilioNoCreadoException()
-            : base("El domicilio no se ha podido crear.-")
-        {
-        }
-
-        public DomicilioNoCreadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public DomicilioNoCreadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede actualizar un domicilio.-
-    /// </summary>
-    public class DomicilioNoActualizadoException : Exception
-    {
-        public DomicilioNoActualizadoException()
-            : base("El domicilio no se ha podido actualizar.-")
-        {
-        }
-
-        public DomicilioNoActualizadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public DomicilioNoActualizadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede agregar un domicilio a una entidad.-
-    /// </summary>
-    public class DomicilioNoAgregadoException : Exception
-    {
-        public DomicilioNoAgregadoException()
-            : base("El domicilio no se ha podido agregar.-")
-        {
-        }
-
-        public DomicilioNoAgregadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public DomicilioNoAgregadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede eliminar un domicilio en sí o cuando no puede eliminarse de una entidad.-
-    /// </summary>
-    public class DomicilioNoEliminadoException : Exception
-    {
-        public DomicilioNoEliminadoException()
-            : base("El domicilio no se ha podido eliminar.-")
-        {
-        }
-
-        public DomicilioNoEliminadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public DomicilioNoEliminadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-    #endregion
-
-    #region EXCEPCIONES_Telefonos
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede encontrar un teléfono buscado.-
-    /// </summary>
-    public class TelefonoNoEncontradoException : Exception
-    {
-        public TelefonoNoEncontradoException()
-            : base("No se ha podido encontrar el teléfono buscado.-")
-        {
-        }
-
-        public TelefonoNoEncontradoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TelefonoNoEncontradoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando se detecta un teléfono con datos inválidos.-
-    /// </summary>
-    public class TelefonoNoValidoException : Exception
-    {
-        public TelefonoNoValidoException()
-            : base("El teléfono tiene datos inválidos.-")
-        {
-        }
-
-        public TelefonoNoValidoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TelefonoNoValidoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede crear un teléfono.-
-    /// </summary>
-    public class TelefonoNoCreadoException : Exception
-    {
-        public TelefonoNoCreadoException()
-            : base("El teléfono no se ha podido crear.-")
-        {
-        }
-
-        public TelefonoNoCreadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TelefonoNoCreadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede actualizar un teléfono.-
-    /// </summary>
-    public class TelefonoNoActualizadoException : Exception
-    {
-        public TelefonoNoActualizadoException()
-            : base("El teléfono no se ha podido actualizar.-")
-        {
-        }
-
-        public TelefonoNoActualizadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TelefonoNoActualizadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no puede agregarse un teléfono a una entidad.-
-    /// </summary>
-    public class TelefonoNoAgregadoException : Exception
-    {
-        public TelefonoNoAgregadoException()
-            : base("No se ha podido agregar el teléfono.-")
-        {
-        }
-
-        public TelefonoNoAgregadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TelefonoNoAgregadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no puede eliminarse.-
-    /// </summary>
-    public class TelefonoNoEliminadoException : Exception
-    {
-        public TelefonoNoEliminadoException()
-            : base("No se ha podido eliminar el teléfono.-")
-        {
-        }
-
-        public TelefonoNoEliminadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TelefonoNoEliminadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-
-
-    #endregion
-
-    #region EXCEPCIONES_TiposDeDocumento
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede encontrar un tipo de documento buscado.-
-    /// </summary>
-    public class TipoDeDocumentoNoEncontradoException : Exception
-    {
-        public TipoDeDocumentoNoEncontradoException()
-            : base("No se ha podido encontrar el tipo de documento buscado.-")
-        {
-        }
-
-        public TipoDeDocumentoNoEncontradoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TipoDeDocumentoNoEncontradoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando se detecta un tipo de documento con datos inválidos.-
-    /// </summary>
-    public class TipoDeDocumentoNoValidoException : Exception
-    {
-        public TipoDeDocumentoNoValidoException()
-            : base("El tipo de documento tiene datos inválidos.-")
-        {
-        }
-
-        public TipoDeDocumentoNoValidoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TipoDeDocumentoNoValidoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-    #endregion
-
-    #region EXCEPCIONES_PRECIOS
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede crear un artículo.-
-    /// </summary>
-    public class PrecioNoValidoException : Exception
-    {
-        public PrecioNoValidoException()
-            : base("El precio informado no es válido.-")
-        {
-        }
-
-        public PrecioNoValidoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public PrecioNoValidoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-
-
-
-#endregion
-
     #region EXCEPCIONES_GENERICAS
 
     /// <summary>
@@ -1260,215 +1055,6 @@ namespace coca
     }
 
 #endregion
-
-
-#region EXCEPCIONES_CodigosDeJustificacion
-
-    /// <summary>
-    /// Excepción que se produce cuando no se encuentra un Codigo de Justificación buscado.-
-    /// </summary>
-    public class CodigoDeJustificacionNoEncontradoException : Exception
-    {
-        public CodigoDeJustificacionNoEncontradoException()
-            : base("Código de Justificación no encontrado.-")
-        {
-        }
-
-        public CodigoDeJustificacionNoEncontradoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public CodigoDeJustificacionNoEncontradoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede eliminar un Codigo de Justificación.-
-    /// </summary>
-    public class CodigoDeJustificacionNoEliminadoException : Exception
-    {
-        public CodigoDeJustificacionNoEliminadoException()
-            : base("Código de Justificación no eliminado.-")
-        {
-        }
-
-        public CodigoDeJustificacionNoEliminadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public CodigoDeJustificacionNoEliminadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando se detecta un Codigo de Justificación nulo o no válido.-
-    /// </summary>
-    public class CodigoDeJustificacionNoValidoException : Exception
-    {
-        public CodigoDeJustificacionNoValidoException()
-            : base("El Código de Justificación es nulo o no válido.-")
-        {
-        }
-
-        public CodigoDeJustificacionNoValidoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public CodigoDeJustificacionNoValidoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-#endregion
-
-
-#region EXCEPCIONES_Miscelaneas
-
-
-    /// <summary>
-    /// Excepción que se produce cuando se detecta una dirección IP no válida.-
-    /// </summary>
-    public class IPNoValidaException : Exception
-    {
-        public IPNoValidaException()
-            : base("La dirección IP especificada no es válida.-")
-        {
-        }
-
-        public IPNoValidaException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public IPNoValidaException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-
-
-
-#endregion
-
-
-#region EXCEPCIONES_Turnos
-
-    /// <summary>
-    /// Excepción que se produce cuando se puede crear un turno.-
-    /// </summary>
-    public class TurnoNoCreadoException : Exception
-    {
-        public TurnoNoCreadoException()
-            : base("No se ha podido iniciar el turno.-")
-        {
-        }
-
-        public TurnoNoCreadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TurnoNoCreadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede encontrar un turno.-
-    /// </summary>
-    public class TurnoNoEncontradoException : Exception
-    {
-        public TurnoNoEncontradoException()
-            : base("No se ha podido encontrar un turno con el Id especificado.-")
-        {
-        }
-
-        public TurnoNoEncontradoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TurnoNoEncontradoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede finalizar un turno.-
-    /// </summary>
-    public class TurnoNoFinalizadoException : Exception
-    {
-        public TurnoNoFinalizadoException()
-            : base("No se ha podido finalizar el turno especificado.-")
-        {
-        }
-
-        public TurnoNoFinalizadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TurnoNoFinalizadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando no se puede tomar un turno.-
-    /// </summary>
-    public class TurnoNoTomadoException : Exception
-    {
-        public TurnoNoTomadoException()
-            : base("No se ha podido tomar el turno.-")
-        {
-        }
-
-        public TurnoNoTomadoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TurnoNoTomadoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Excepción que se produce cuando se detecta un turno con datos no válidos.-
-    /// </summary>
-    public class TurnoNoValidoException : Exception
-    {
-        public TurnoNoValidoException()
-            : base("El turno tiene datos no válidos.-")
-        {
-        }
-
-        public TurnoNoValidoException(string mensaje)
-            : base(mensaje)
-        {
-        }
-
-        public TurnoNoValidoException(string mensaje, Exception interna)
-            : base(mensaje, interna)
-        {
-        }
-    }
-
-#endregion
-
 
 #region EXCEPCIONES_Parametros
 

@@ -41,6 +41,7 @@
             this.conectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desconectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verConexiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sistemasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -93,7 +94,6 @@
             // 
             // confirmacionesToolStripMenuItem
             // 
-            this.confirmacionesToolStripMenuItem.Enabled = false;
             this.confirmacionesToolStripMenuItem.Image = global::coca.Properties.Resources.database_down_icon64;
             this.confirmacionesToolStripMenuItem.Name = "confirmacionesToolStripMenuItem";
             this.confirmacionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
@@ -123,6 +123,7 @@
             // 
             this.configuraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.db2ForIToolStripMenuItem,
+            this.sistemasToolStripMenuItem,
             this.opcionesToolStripMenuItem});
             this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
             this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
@@ -159,6 +160,14 @@
             this.verConexiónToolStripMenuItem.Name = "verConexiónToolStripMenuItem";
             this.verConexiónToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.verConexiónToolStripMenuItem.Text = "Ver Conexión...";
+            this.verConexiónToolStripMenuItem.Click += new System.EventHandler(this.verConexiónToolStripMenuItem_Click);
+            // 
+            // sistemasToolStripMenuItem
+            // 
+            this.sistemasToolStripMenuItem.Name = "sistemasToolStripMenuItem";
+            this.sistemasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sistemasToolStripMenuItem.Text = "Sistemas...";
+            this.sistemasToolStripMenuItem.Click += new System.EventHandler(this.sistemasToolStripMenuItem_Click);
             // 
             // opcionesToolStripMenuItem
             // 
@@ -200,12 +209,12 @@
             // tslConfirmaciones
             // 
             this.tslConfirmaciones.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tslConfirmaciones.Enabled = false;
             this.tslConfirmaciones.Image = global::coca.Properties.Resources.database_up_icon64;
             this.tslConfirmaciones.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tslConfirmaciones.Name = "tslConfirmaciones";
             this.tslConfirmaciones.Size = new System.Drawing.Size(23, 22);
             this.tslConfirmaciones.Text = "Confirmaciones";
+            this.tslConfirmaciones.Click += new System.EventHandler(this.tslConfirmaciones_Click);
             // 
             // tslBuscarEtiqueta
             // 
@@ -346,6 +355,7 @@
         private System.Windows.Forms.ToolStripMenuItem opcionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem búscarEtiquetaToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem sistemasToolStripMenuItem;
     }
 }
 

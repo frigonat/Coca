@@ -16,7 +16,7 @@ namespace coca
         /// <summary>
         /// Número de documento al que pertence el pallet.-
         /// </summary>
-        int numeroDocumento;
+        private long numeroDocumento;
 
         /// <summary>
         /// Código SSCC de la caja.-
@@ -33,14 +33,13 @@ namespace coca
         /// </summary>
         List<Unidad> unidades;
         #endregion
-
-        
+      
         #region propiedades
 
         /// <summary>
         /// Obtiene el número de documento al que pertence el pallet.-
         /// </summary>
-        public int NumeroDocumento
+        public long NumeroDocumento
         {
             get { return this.numeroDocumento; }
         }
@@ -64,7 +63,6 @@ namespace coca
 
         #endregion
 
-
         /// <summary>
         /// Nombre de la bitácora de datos comunes.-
         /// </summary>
@@ -79,7 +77,7 @@ namespace coca
         /// <summary>
         /// Constructor.-
         /// </summary>
-        public Caja(string nuevoSSCC, int nuevoNumeroDeDocumento)
+        public Caja(string nuevoSSCC, long nuevoNumeroDeDocumento)
         {
             this.numeroDocumento = nuevoNumeroDeDocumento;
             this.codigoSSCC = nuevoSSCC;

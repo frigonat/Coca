@@ -136,9 +136,63 @@ namespace coca
         /// Obtiene una lista con todos los almacenes existentes en el sistema.-
         /// </summary>
         /// <returns></returns>
-        public List<Almacen> Obtener()
+        public static List<Almacen> Obtener()
         {
-            return null;
+            List<Almacen> listaParaDevolver = new List<Almacen>();
+            List<string> parametrosDeConexion = new List<string>();
+            iSeriesConnection cn;
+            DataTable registrosEncontrados = null;
+
+            string iSQL = "";
+            iSQL = "SELECT * FROM PSIWBFL62.WWHSB ORDER BY WHDESC";
+
+            try
+            {
+                parametrosDeConexion = iSeries.ObtenerCredenciales();
+            }
+            catch (Exception ex)
+            {
+                parametrosDeConexion = null;
+                throw ex;
+            }
+
+            try
+            {
+                cn = new iSeriesConnection(parametrosDeConexion[0], parametrosDeConexion[1], parametrosDeConexion[2]);
+                cn.Open();
+                registrosEncontrados = cn.ExecuteQuery(iSQL, 0);
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                Bitacora.AgregarEntrada("Han aparecido errores al intentar obtener los registros solicitados. Puede haber excepciones internas con mayor detalle.-", TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                Bitacora.AgregarEntrada("iSQL ejecutada: " + iSQL, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+
+                Exception excepcionActual = ex;
+                while (excepcionActual != null)
+                {
+                    Bitacora.AgregarEntrada(excepcionActual.Message, TiposDeEntrada.Error, objetoDeNegocio, 0, nombreBitacora);
+                    excepcionActual = ex.InnerException;
+                }
+            }
+
+            if (registrosEncontrados != null)
+            {
+                foreach (DataRow fila in registrosEncontrados.Rows)
+                {
+                    try
+                    {
+                        Almacen nuevoAlmacen = new Almacen(fila.Field<string>("WHWHS"));
+                        listaParaDevolver.Add(nuevoAlmacen);
+                    }
+                    catch (Exception)
+                    {
+                        //do nothing
+                    }
+                }
+            }
+
+            return listaParaDevolver;
         }
 
         /// <summary>
