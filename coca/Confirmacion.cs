@@ -339,11 +339,11 @@ namespace coca
         private const string objetoDeNegocio = "Confirmacion";
 
         /// <summary>
-        /// 
+        /// Obtiene la confirmación para el documento identificado por los datos recibidos como parámetros.-
         /// </summary>
-        /// <param name="codigoAlmacenBuscado"></param>
-        /// <param name="tipoDocumentoBuscado"></param>
-        /// <param name="numeroDocumentoBuscado"></param>
+        /// <param name="codigoAlmacenBuscado">Código del almacén del Documento confirmado.-</param>
+        /// <param name="tipoDocumentoBuscado">Tipo de Documento de confirmado.-</param>
+        /// <param name="numeroDocumentoBuscado">Número del documento confirmado.-</param>
         /// <exception cref="Exception"></exception>
         /// <exception cref="TipoDeDocumentoNoValidoException"></exception>
         /// <exception cref="DocumentoNoValidoException"></exception>
@@ -499,12 +499,12 @@ namespace coca
                 throw new DocumentoNoEncontradoException(mensaje);
             }
         }
-        
+
         /// <summary>
-        /// 
+        /// Obtiene una lista de las confirmaciones generadas dentro del rango de fechas recibido como parámetro.-
         /// </summary>
-        /// <param name="fechaDesde"></param>
-        /// <param name="fechaHasta"></param>
+        /// <param name="fechaDesde">Fecha inicial del rango de fechas.-</param>
+        /// <param name="fechaHasta">Fecha final del rango de fechas.-</param>
         /// <returns></returns>
         public static List<Confirmacion> Obtener(DateTime fechaDesde, DateTime fechaHasta)
         {
@@ -515,13 +515,13 @@ namespace coca
             iSQL += fechaDesde.ToString("yyyy-MM-dd") + "' AND '" + fechaHasta.ToString("yyyy-MM-dd") + "' ORDER BY 1";
             return obtener(iSQL);
         }
-            
+
         /// <summary>
-        /// 
+        /// Obtiene una lista de las confirmaciones generadas dentro del rango de fechas recibido como parámetro siempre y cuando sean de documentos que contengan el lote especificado.-
         /// </summary>
-        /// <param name="fechaDesde"></param>
-        /// <param name="fechaHasta"></param>
-        /// <param name="numeroLote"></param>
+        /// <param name="fechaDesde">Fecha inicial del rango de fechas.-</param>
+        /// <param name="fechaHasta">Fecha final del rango de fechas.-</param>
+        /// <param name="numeroLote">Número de lote buscado.-</param>
         /// <returns></returns>
         public static List<Confirmacion> Obtener(DateTime fechaDesde, DateTime fechaHasta, string numeroLote)
         {
@@ -539,9 +539,9 @@ namespace coca
         }
 
         /// <summary>
-        /// 
+        /// Devuelve una lista con las confirmaciones recuperadas a partir de la ejecución de la sentencia SQL recibida como parámetro.-
         /// </summary>
-        /// <param name="iSQL"></param>
+        /// <param name="iSQL">Instrucción SQL a ejecutar.</param>
         /// <returns></returns>
         private static List<Confirmacion> obtener(string iSQL)
         {
@@ -593,7 +593,7 @@ namespace coca
                         try
                         {
                             decimal a25 = fila.Field<decimal>("ID");
-                            long a = System.Convert.ToInt32(a25);
+                            long a = System.Convert.ToInt64(a25);
                             Confirmacion nuevaConfirmacion = new Confirmacion(fila.Field<string>("ALMACEN"), fila.Field<string>("TIPO_DOCUMENTO"), a);
                             listaParaDevolver.Add(nuevaConfirmacion);
                         }
@@ -736,7 +736,6 @@ namespace coca
 
             return listaParaDevolver;
         }
-
 
         /// <summary>
         /// 

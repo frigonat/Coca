@@ -143,7 +143,7 @@ namespace coca
         {
             string codigoAlmacenDocumentoSeleccionado = dgvConfirmaciones.CurrentRow.Cells[colConfirmacionAlmacen.Name].Value.ToString();
             string tipoDocumentoSeleccionado = "I";
-            int numeroDocumentoSeleccionado = System.Convert.ToInt32(dgvConfirmaciones.CurrentRow.Cells[colConfirmacionNumero.Name].Value);
+            long numeroDocumentoSeleccionado = System.Convert.ToInt64(dgvConfirmaciones.CurrentRow.Cells[colConfirmacionNumero.Name].Value);
             tiposDeDocumento.TryGetValue(dgvConfirmaciones.CurrentRow.Cells[colConfirmacionTipoDocumento.Name].Value.ToString(), out tipoDocumentoSeleccionado);
             
             frmDocumentoConfirmacion f = new frmDocumentoConfirmacion();
